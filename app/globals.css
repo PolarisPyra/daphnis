@@ -1,0 +1,365 @@
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer base {
+   
+:root  {
+  --background: 0.00 0.00% 100.00%;
+  --foreground: 0.00 0.00% 9.80%;
+  
+  --primary: 0.00 0.00% 0.00%;
+  --primary-foreground: 0.00 0.00% 100.00%;
+  
+  --card: 0.00 0.00% 100.00%;
+  --card-foreground: 0.00 0.00% 9.80%;
+  
+  --popover: 0.00 0.00% 100.00%;
+  --popover-foreground: 0.00 0.00% 9.80%;
+  
+  --secondary: 0.00 0.00% 100.00%;
+  --secondary-foreground: 0.00 0.00% 0.00%;
+  
+  --muted: 0.00 0.00% 80.00%;
+  --muted-foreground: 0.00 0.00% 40.00%;
+   
+  --accent: 0.00 0.00% 80.00%;
+  --accent-foreground: 0.00 0.00% 14.90%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --border: 0.00 0.00% 20.00%;
+  --input: 0.00 0.00% 87.45%;
+  --ring: 0.00 0.00% 100.00%;
+  
+  --radius: 0.5rem;
+      
+}
+.dark  {
+  
+--background: 0.00 0.00% 0.00%;
+--foreground: 0.00 0.00% 100.00%;
+
+--primary: 0.00 0.00% 100.00%;
+--primary-foreground: 0.00 0.00% 9.80%;
+
+--card: 0.00 0.00% 7.84%;
+--card-foreground: 0.00 0.00% 100.00%;
+
+--popover: 0.00 0.00% 0.00%;
+--popover-foreground: 0.00 0.00% 100.00%;
+
+--secondary: 0.00 0.00% 34.90%;
+--secondary-foreground: 0.00 0.00% 100.00%;
+
+--muted: 0.00 0.00% 9.80%;
+--muted-foreground: 0.00 0.00% 50.20%;
+ 
+--accent: 0.00 0.00% 34.90%;
+--accent-foreground: 0.00 0.00% 100.00%;
+
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 210 40% 98%;
+
+--border: 0.00 0.00% 20.00%;
+--input: 0.00 0.00% 25.10%;
+--ring: 0.00 0.00% 100.00%;
+--radius: 0.5rem;
+}
+  }
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+  }
+
+
+img,
+video {
+  max-width: revert;
+  height: revert;
+}
+
+/*
+* CHUSAN AVATAR
+*/
+
+.avatar_group {
+  width: 420px;
+  height: 330px;
+  margin: 0px auto 0px auto;
+  /* background-color: red; */
+  position: relative;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 480px) {
+  .avatar_group {
+    width: 100%; /* Adjust width for mobile */
+    height: auto; /* Adjust height as needed */
+    /* You can also adjust other properties as needed */
+  }
+}
+/* アバター土台 */
+.avatar_base {
+  width: 272px;
+  height: 330px;
+  padding: 10px 0 0 0;
+  position: relative;
+  margin: 0px auto 0px auto;
+  overflow: hidden;
+}
+
+/* 背景 */
+.avatar_back {
+  display: block;
+  width: 272px;
+  height: 330px;
+  position: absolute;
+  top: 25px;
+  z-index: 100;
+}
+
+/* 右足 */
+.avatar_skinfoot_r {
+  display: block;
+  width: 42px;
+  height: 52px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 101;
+  top: 280px;
+  left: 84px;
+}
+.avatar_skinfoot_r img {
+  transform: translate(0px, -204px);
+}
+
+/* 左足 */
+.avatar_skinfoot_l {
+  display: block;
+  width: 42px;
+  height: 52px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 102;
+  top: 280px;
+  left: 147px;
+}
+.avatar_skinfoot_l img {
+  transform: translate(-42px, -204px);
+}
+
+/* デフォルト髪の毛 */
+.avatar_hair {
+  display: block;
+  width: 46px;
+  height: 78px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 103;
+  top: 21px;
+  left: 110px;
+}
+.avatar_hair img {
+  transform: translate(0px, 0px);
+}
+
+/* 体色 */
+.avatar_skin {
+  display: block;
+  width: 128px;
+  height: 204px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 104;
+  top: 93px;
+  left: 72px;
+}
+.avatar_skin img {
+  transform: translate(0px, 0px);
+}
+
+/* 衣装 */
+.avatar_wear {
+  display: block;
+  width: 258px;
+  height: 218px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 105;
+  top: 106px;
+  left: 7px;
+}
+
+.avatar_wear img {
+  transform: translate(0px, 0px);
+}
+
+/* 表情 */
+.avatar_face {
+  display: block;
+  width: 58px;
+  height: 64px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 106;
+  top: 100px;
+  left: 107px;
+}
+
+.avatar_face img {
+  transform: translate(0px, 0px);
+}
+
+/* 表情 */
+.avatar_face_static {
+  display: block;
+  width: 58px;
+  height: 64px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 106;
+  top: 100px;
+  left: 107px;
+}
+
+.avatar_face img {
+  transform: translate(0px, 0px);
+}
+/* フェイスカバー */
+.avatar_face {
+  display: block;
+  width: 116px;
+  height: 104px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 107;
+  top: 96px;
+  left: 78px;
+}
+
+.avatar_faceCover img {
+  transform: translate(0px, 0px);
+}
+
+/* 頭 */
+.avatar_head {
+  display: block;
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 108;
+  top: 28px;
+  left: 37px;
+}
+
+.avatar_head img {
+  transform: translate(0px, 0px);
+}
+
+/* 右手 */
+.avatar_hand_r {
+  display: block;
+  width: 36px;
+  height: 72px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 108;
+  top: 178px;
+  left: 52px;
+}
+
+.avatar_hand_r img {
+  transform: translate(0px, 0px);
+}
+
+/* 左手 */
+.avatar_hand_l {
+  display: block;
+  width: 36px;
+  height: 72px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 109;
+  top: 178px;
+  left: 184px;
+}
+
+.avatar_hand_l img {
+  transform: translate(0px, 0px);
+}
+
+/* 右アイテム */
+.avatar_item_r {
+  display: block;
+  width: 100px;
+  height: 272px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 109;
+  transform: rotate(-5deg);
+  top: 50px;
+  left: 9px;
+}
+
+.avatar_item_r img {
+  transform: translate(0px, 0px);
+}
+
+/* 左アイテム */
+.avatar_item_l {
+  display: block;
+  width: 100px;
+  height: 272px;
+  position: absolute;
+  overflow: hidden;
+  z-index: 110;
+  transform: rotate(5deg);
+  top: 50px;
+  left: 163px;
+}
+
+.avatar_item_l img {
+  transform: translate(-100px, 0px);
+}
+
+
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 180px);
+  grid-auto-flow: dense;
+  align-items: stretch;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+
+}
+
+.gameicon,
+.patchContainer {
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: inherit;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.gameicon {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    margin: 15px;
+    width: 144px;
+    padding: 10px;
+    justify-content: center;
+}
+
+label.gameicon {
+    cursor: pointer;
+    background: #fffcf0;
+}
