@@ -130,8 +130,8 @@ export const columns: ColumnDef<artemis>[] = [
     },
   },
   {
-    accessorKey: "difficulty",
-    header: "Difficulty",
+    accessorKey: "level",
+    header: "Level",
     cell: ({ row }) => (
       <div className="font-medium">
         {row.original.level}
@@ -139,7 +139,12 @@ export const columns: ColumnDef<artemis>[] = [
         {getDifficultyText(row.original.chartId)}
       </div>
     ),
+    filterFn: (row, columnId, filterValue) => {
+      const level = row.getValue(columnId);
+      return Number(level) === Number(filterValue);
+    },
   },
+
   {
     accessorKey: "FC / AJ",
     header: "FC / AJ",

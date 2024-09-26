@@ -12,6 +12,7 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
+  ColumnFiltersState,
 } from "@tanstack/react-table";
 
 import {
@@ -23,6 +24,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import DebouncedInput from "./DebouncedInput";
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; // Import Tabs components
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -34,6 +38,8 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [activeFilter, setActiveFilter] = useState("title");
 
   const table = useReactTable({
     data,
@@ -41,24 +47,65 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       globalFilter,
+      columnFilters,
     },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
 
+  const handleFilterChange = (filterId: string, validFilter: string) => {
+    if (validFilter) {
+      setColumnFilters([{ id: filterId, value: validFilter }]);
+    } else {
+      setColumnFilters((previouslySetFilter) =>
+        previouslySetFilter.filter((filter) => filter.id !== filterId),
+      );
+    }
+  };
+  const resetFilterState = (tab: string) => {
+    setActiveFilter(tab);
+    setColumnFilters((newfilter) =>
+      newfilter.filter((filter) => filter.id === tab),
+    );
+  };
   return (
     <div className="rounded-md border">
-      <div className="">
-        <DebouncedInput
-          value={globalFilter ?? ""}
-          onChange={(value) => setGlobalFilter(String(value))}
-          placeholder={`Search`}
-        />
+      <div className="p-2">
+        <Tabs defaultValue={activeFilter} onValueChange={resetFilterState}>
+          <TabsList className="flex space-x-2 p-4">
+            <TabsTrigger value="title">Search by Title</TabsTrigger>
+            <TabsTrigger value="level">Search by Level</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="level">
+            <DebouncedInput
+              value={
+                (columnFilters.find((filter) => filter.id === "level")
+                  ?.value as string) || ""
+              }
+              onChange={(value) => handleFilterChange("level", String(value))}
+              placeholder="Search by level"
+            />
+          </TabsContent>
+
+          <TabsContent value="title">
+            <DebouncedInput
+              value={
+                (columnFilters.find((filter) => filter.id === "title")
+                  ?.value as string) || ""
+              }
+              onChange={(value) => handleFilterChange("title", String(value))}
+              placeholder="Search by title"
+            />
+          </TabsContent>
+        </Tabs>
       </div>
+
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
