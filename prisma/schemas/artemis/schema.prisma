@@ -896,18 +896,6 @@ model chuni_score_playlog {
   @@index([user], map: "user")
 }
 
-model chuni_static_avatar {
-  id                Int     @id @default(autoincrement())
-  version           Int
-  avatarAccessoryId Int?
-  name              String? @db.VarChar(255)
-  category          Int?
-  iconPath          String? @db.VarChar(255)
-  texturePath       String? @db.VarChar(255)
-
-  @@unique([version, avatarAccessoryId], map: "chuni_static_avatar_uk")
-}
-
 model chuni_static_cards {
   id          Int    @id @default(autoincrement())
   version     Int
@@ -1029,18 +1017,8 @@ model cozynet_artemisapi_sessions {
   data       String? @db.MediumText
 }
 
-model cozynet_chuni_static_accessory {
-  id          Int     @id
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-}
-
 model cozynet_chuni_static_mapicon {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   str         String? @db.VarChar(255)
   imagePath   String? @db.VarChar(255)
   sortName    String? @db.VarChar(255)
@@ -1050,7 +1028,7 @@ model cozynet_chuni_static_mapicon {
 }
 
 model cozynet_chuni_static_nameplate {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   str         String? @db.VarChar(255)
   imagePath   String? @db.VarChar(255)
   sortName    String? @db.VarChar(255)
@@ -1060,7 +1038,7 @@ model cozynet_chuni_static_nameplate {
 }
 
 model cozynet_chuni_static_systemvoice {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   str         String? @db.VarChar(255)
   imagePath   String? @db.VarChar(255)
   sortName    String? @db.VarChar(255)
@@ -1070,7 +1048,7 @@ model cozynet_chuni_static_systemvoice {
 }
 
 model cozynet_chuni_static_trophies {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   str         String? @db.VarChar(255)
   imagePath   String? @db.VarChar(255)
   sortName    String? @db.VarChar(255)
@@ -4553,4 +4531,48 @@ model sao_static_trace_table {
   CommonRewardId        Int
   CommonRewardNum       Int
   Rate                  Int
+}
+
+model cozynet_static_characters {
+  id              Int      @id @default(autoincrement())
+  dataName        String?  @db.VarChar(255)
+  releaseTagName  String?  @db.VarChar(255)
+  netOpenName     String?  @db.VarChar(255)
+  disableFlag     Boolean?
+  name            String?  @db.VarChar(255)
+  sortName        String?  @db.VarChar(255)
+  works           String?  @db.VarChar(255)
+  illustratorName String?  @db.VarChar(255)
+  defaultHave     Boolean?
+  rareType        Int?
+  defaultImages   String?  @db.VarChar(255)
+  priority        Int?
+}
+
+model cozynet_static_tes_characters {
+  id              Int      @id @default(autoincrement())
+  dataName        String?  @unique(map: "dataName") @db.VarChar(255)
+  releaseTagName  String?  @db.VarChar(255)
+  netOpenName     String?  @db.VarChar(255)
+  disableFlag     Boolean?
+  name            String?  @db.VarChar(255)
+  sortName        String?  @db.VarChar(255)
+  works           String?  @db.VarChar(255)
+  illustratorName String?  @db.VarChar(255)
+  defaultHave     Boolean?
+  rareType        Int?
+  defaultImages   String?  @db.VarChar(255)
+  priority        Int?
+}
+
+model chuni_static_avatar {
+  id                Int     @id @default(autoincrement())
+  version           Int
+  avatarAccessoryId Int?
+  name              String? @db.VarChar(255)
+  category          Int?
+  iconPath          String? @db.VarChar(255)
+  texturePath       String? @db.VarChar(255)
+
+  @@unique([version, avatarAccessoryId], map: "chuni_static_avatar_uk")
 }
