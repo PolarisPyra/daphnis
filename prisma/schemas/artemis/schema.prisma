@@ -4533,22 +4533,6 @@ model sao_static_trace_table {
   Rate                  Int
 }
 
-model cozynet_static_tes_characters {
-  id              Int      @id @default(autoincrement())
-  dataName        String?  @unique(map: "dataName") @db.VarChar(255)
-  releaseTagName  String?  @db.VarChar(255)
-  netOpenName     String?  @db.VarChar(255)
-  disableFlag     Boolean?
-  name            String?  @db.VarChar(255)
-  sortName        String?  @db.VarChar(255)
-  works           String?  @db.VarChar(255)
-  illustratorName String?  @db.VarChar(255)
-  defaultHave     Boolean?
-  rareType        Int?
-  defaultImages   String?  @db.VarChar(255)
-  priority        Int?
-}
-
 model chuni_static_avatar {
   id                Int     @id @default(autoincrement())
   version           Int
