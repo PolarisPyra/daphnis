@@ -2,7 +2,7 @@
 
 import { getAuth } from "@/auth/queries/getauth";
 import { getSupportedVersionNumber } from "@/lib/api";
-import { artemis } from "@/lib/prisma";
+import { artemis, daphnis } from "@/lib/prisma";
 
 export async function getCurrentSystemVoice() {
   const { user } = await getAuth();
@@ -77,18 +77,14 @@ export async function getSystemVoices() {
     (item) => item.itemId,
   );
 
-  const AllSystemVoices =
-    await artemis.cozynet_chuni_static_systemvoice.findMany({
-      select: {
-        id: true,
-        str: true,
-        sortName: true,
-        category: true,
-        imagePath: true,
-        rareType: true,
-        netOpenName: true,
-      },
-    });
+  const AllSystemVoices = await daphnis.chuni_static_systemvoice.findMany({
+    select: {
+      id: true,
+      str: true,
+      sortName: true,
+      imagePath: true,
+    },
+  });
 
   const currentlyUnlockedSystemVoices = Array.from(
     new Map(

@@ -28,7 +28,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
-import { cozynet_chuni_static_mapicon } from "@/prisma/schemas/artemis/generated/artemis";
+import { chuni_static_mapicon } from "@/prisma/schemas/daphnis/generated/daphnis";
 import { getCurrentMapIcon, updatePlayerMapIcon } from "./actions";
 
 const getNamePlateTextures = (id: number | undefined) => {
@@ -37,7 +37,7 @@ const getNamePlateTextures = (id: number | undefined) => {
   return `mapIcons/CHU_UI_MapIcon_${paddedId}.png`;
 };
 
-type mapIcons = cozynet_chuni_static_mapicon;
+type mapIcons = chuni_static_mapicon;
 
 type SystemVoiceSelectionProps = {
   playerMapIconCustomization: {

@@ -2,7 +2,7 @@
 
 import { getAuth } from "@/auth/queries/getauth";
 import { getSupportedVersionNumber } from "@/lib/api";
-import { artemis } from "@/lib/prisma";
+import { artemis, daphnis } from "@/lib/prisma";
 
 export async function getCurrentMapIcon() {
   const { user } = await getAuth();
@@ -75,15 +75,12 @@ export async function getMapIcons() {
 
   const unlockedMapIcons = checkIfMapIconIsUnlocked.map((item) => item.itemId);
 
-  const AllMapIcons = await artemis.cozynet_chuni_static_mapicon.findMany({
+  const AllMapIcons = await daphnis.chuni_static_mapicon.findMany({
     select: {
       id: true,
       str: true,
       sortName: true,
-      category: true,
       imagePath: true,
-      rareType: true,
-      netOpenName: true,
     },
   });
 

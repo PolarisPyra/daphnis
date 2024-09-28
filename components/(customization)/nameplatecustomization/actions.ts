@@ -2,7 +2,7 @@
 
 import { getAuth } from "@/auth/queries/getauth";
 import { getSupportedVersionNumber } from "@/lib/api";
-import { artemis } from "@/lib/prisma";
+import { artemis, daphnis } from "@/lib/prisma";
 
 export async function getCurrentNameplate() {
   const { user } = await getAuth();
@@ -77,14 +77,12 @@ export async function getNamePlates() {
     (item) => item.itemId,
   );
 
-  const AllNameplates = await artemis.cozynet_chuni_static_nameplate.findMany({
+  const AllNameplates = await daphnis.chuni_static_nameplate.findMany({
     select: {
       id: true,
       str: true,
       sortName: true,
-      category: true,
       imagePath: true,
-      rareType: true,
       netOpenName: true,
     },
   });

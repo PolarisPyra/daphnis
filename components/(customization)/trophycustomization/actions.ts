@@ -2,7 +2,7 @@
 
 import { getAuth } from "@/auth/queries/getauth";
 import { getSupportedVersionNumber } from "@/lib/api";
-import { artemis } from "@/lib/prisma";
+import { artemis, daphnis } from "@/lib/prisma";
 
 export async function getCurrentTrophies() {
   const { user } = await getAuth();
@@ -75,15 +75,12 @@ export async function getTrophies() {
 
   const unlockedTrophies = checkIfTrophyIsUnlocked.map((item) => item.itemId);
 
-  const AllTrophies = await artemis.cozynet_chuni_static_trophies.findMany({
+  const AllTrophies = await daphnis.chuni_static_trophies.findMany({
     select: {
-      category: true,
       netOpenName: true,
       id: true,
       str: true,
-      imagePath: true,
       rareType: true,
-      sortName: true,
     },
   });
 

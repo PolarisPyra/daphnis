@@ -64,7 +64,6 @@ model aime_user {
   chuni_score_best                                                 chuni_score_best[]
   chuni_score_course                                               chuni_score_course[]
   chuni_score_playlog                                              chuni_score_playlog[]
-  cozynet_rival_codes                                              cozynet_rival_codes?
   cxb_playlog                                                      cxb_playlog[]
   cxb_profile                                                      cxb_profile[]
   cxb_ranking                                                      cxb_ranking[]
@@ -1009,58 +1008,6 @@ model chuni_static_music {
   worldsEndTag String? @db.VarChar(7)
 
   @@unique([version, songId, chartId], map: "chuni_static_music_uk")
-}
-
-model cozynet_artemisapi_sessions {
-  session_id String  @id @db.VarChar(128)
-  expires    Int     @db.UnsignedInt
-  data       String? @db.MediumText
-}
-
-model cozynet_chuni_static_mapicon {
-  id          Int     @id @default(autoincrement())
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-}
-
-model cozynet_chuni_static_nameplate {
-  id          Int     @id @default(autoincrement())
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-}
-
-model cozynet_chuni_static_systemvoice {
-  id          Int     @id @default(autoincrement())
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-}
-
-model cozynet_chuni_static_trophies {
-  id          Int     @id @default(autoincrement())
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-}
-
-model cozynet_rival_codes {
-  id         Int       @id
-  rival_code Int?
-  aime_user  aime_user @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cozynet_rival_codes_ibfk_1")
 }
 
 model cxb_playlog {
@@ -4543,14 +4490,4 @@ model chuni_static_avatar {
   texturePath       String? @db.VarChar(255)
 
   @@unique([version, avatarAccessoryId], map: "chuni_static_avatar_uk")
-}
-
-model cozynet_chuni_static_characters {
-  id          Int     @id
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
 }

@@ -30,7 +30,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
-import { cozynet_chuni_static_nameplate } from "@/prisma/schemas/artemis/generated/artemis";
+import { chuni_static_nameplate } from "@/prisma/schemas/daphnis/generated/daphnis";
 
 const getNamePlateTextures = (id: number | undefined) => {
   if (id === undefined) return "";
@@ -39,7 +39,7 @@ const getNamePlateTextures = (id: number | undefined) => {
   return `namePlates/CHU_UI_NamePlate_${paddedId}.png`;
 };
 
-type player_nameplates = cozynet_chuni_static_nameplate;
+type player_nameplates = chuni_static_nameplate;
 
 type NamePlateSelectionProps = {
   playerNamePlateSelectionData: {

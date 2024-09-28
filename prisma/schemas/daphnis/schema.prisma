@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/daphnis"
@@ -14,9 +8,94 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
-  ADMIN
-  USER
+model chuni_rival_codes {
+  id        Int     @id
+  rivalCode String? @db.VarChar(255)
+}
+
+model chuni_static_characters {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  imagePath   String? @db.VarChar(255)
+  sortName    String? @db.VarChar(255)
+  category    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+  rareType    String? @db.VarChar(255)
+}
+
+model chuni_static_mapicon {
+  id        Int     @id
+  str       String? @db.VarChar(255)
+  imagePath String? @db.VarChar(255)
+  sortName  String? @db.VarChar(255)
+}
+
+model chuni_static_nameplate {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  imagePath   String? @db.VarChar(255)
+  sortName    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+}
+
+model chuni_static_systemvoice {
+  id        Int     @id
+  str       String? @db.VarChar(255)
+  imagePath String? @db.VarChar(255)
+  sortName  String? @db.VarChar(255)
+}
+
+model chuni_static_trophies {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  rareType    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+}
+
+model linksharingtoken {
+  id             String    @id
+  token          String    @unique(map: "LinkSharingToken_token_key")
+  createdAt      DateTime  @default(now())
+  userId         String
+  tokenExpiredAt DateTime?
+  playlogId      Int?
+  user           user      @relation(fields: [userId], references: [id], map: "LinkSharingToken_userId_fkey")
+
+  @@index([userId], map: "LinkSharingToken_userId_fkey")
+}
+
+model passwordresettoken {
+  id        String    @id
+  token     String    @unique(map: "PasswordResetToken_token_key")
+  createdAt DateTime  @default(now())
+  userId    String
+  resetAt   DateTime?
+  user      user      @relation(fields: [userId], references: [id], map: "PasswordResetToken_userId_fkey")
+
+  @@index([userId], map: "PasswordResetToken_userId_fkey")
+}
+
+model session {
+  id        String   @id
+  expiresAt DateTime
+  userId    String
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Session_userId_fkey")
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model user {
+  id                 String               @id
+  username           String               @unique(map: "User_username_key")
+  accessCode         String               @unique(map: "User_accessCode_key")
+  UserId             Int                  @unique(map: "User_UserId_key")
+  gameVersion        GameVersion          @default(Luminous)
+  hashedPassword     String
+  email              String               @unique(map: "User_email_key")
+  role               user_role            @default(USER)
+  linksharingtoken   linksharingtoken[]
+  passwordresettoken passwordresettoken[]
+  session            session[]
 }
 
 enum GameVersion {
@@ -28,45 +107,7 @@ enum GameVersion {
   New
 }
 
-model User {
-  id          String      @id
-  sessions    Session[]
-  username    String      @unique
-  accessCode  String      @unique
-  UserId      Int         @unique
-  gameVersion GameVersion @default(Luminous)
-
-  hashedPassword     String
-  email              String               @unique
-  role               UserRole             @default(USER)
-  PasswordResetToken PasswordResetToken[]
-  LinkSharingToken   LinkSharingToken[]
-}
-
-model PasswordResetToken {
-  id        String    @id
-  token     String    @unique
-  createdAt DateTime  @default(now())
-  userId    String
-  resetAt   DateTime?
-
-  user User @relation(fields: [userId], references: [id])
-}
-
-model LinkSharingToken {
-  id             String    @id
-  token          String    @unique
-  createdAt      DateTime  @default(now())
-  userId         String
-  tokenExpiredAt DateTime?
-  playlogId      Int?
-
-  user User @relation(fields: [userId], references: [id])
-}
-
-model Session {
-  id        String   @id
-  expiresAt DateTime
-  userId    String
-  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+enum user_role {
+  ADMIN
+  USER
 }

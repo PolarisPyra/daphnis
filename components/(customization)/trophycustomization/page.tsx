@@ -30,9 +30,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
 import { getCurrentTrophies, updatePlayerTrophy } from "./actions";
-import { cozynet_chuni_static_trophies } from "@/prisma/schemas/artemis/generated/artemis";
+import { chuni_static_trophies } from "@/prisma/schemas/daphnis/generated/daphnis";
 
-type static_trophies = cozynet_chuni_static_trophies;
+type static_trophies = chuni_static_trophies;
 
 type AvatarSelectionProps = {
   playerTrophySelectionData: {
