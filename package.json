@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prod-db:init": "npx prisma migrate dev --name init --schema prisma/schemas/daphnis/schema.prisma; npx prisma db pull --schema prisma/schemas/artemis/schema.prisma",
-    "prod-daphnis:migrate": "prisma migrate  --schema=./prisma/schemas/daphnis/schema.prisma",
+    "prod-daphnis:migrate": "prisma migrate deploy --schema=./prisma/schemas/daphnis/schema.prisma",
     "dev-db:init": "npx prisma migrate dev --name init --schema prisma/schemas/daphnis/schema.prisma; npx prisma db pull --schema prisma/schemas/artemis/schema.prisma",
     "dev-daphnis:migrate": "prisma migrate dev  --schema=./prisma/schemas/daphnis/schema.prisma",
     "dev-artemis:generate": "prisma generate  --schema=./prisma/schemas/artemis/schema.prisma",
