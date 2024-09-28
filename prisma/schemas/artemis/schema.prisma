@@ -4561,45 +4561,6 @@ model chuni_static_avatar {
   @@unique([version, avatarAccessoryId], map: "chuni_static_avatar_uk")
 }
 
-model a_cozynet_chuni_static_characters {
-  id          Int     @id
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  category    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-}
-
-model a_cozynet_chuni_static_mapicon {
-  id        Int     @id
-  str       String? @db.VarChar(255)
-  imagePath String? @db.VarChar(255)
-  sortName  String? @db.VarChar(255)
-}
-
-model a_cozynet_chuni_static_nameplate {
-  id          Int     @id
-  str         String? @db.VarChar(255)
-  imagePath   String? @db.VarChar(255)
-  sortName    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-}
-
-model a_cozynet_chuni_static_systemvoice {
-  id        Int     @id
-  str       String? @db.VarChar(255)
-  imagePath String? @db.VarChar(255)
-  sortName  String? @db.VarChar(255)
-}
-
-model a_cozynet_chuni_static_trophies {
-  id          Int     @id
-  str         String? @db.VarChar(255)
-  rareType    String? @db.VarChar(255)
-  netOpenName String? @db.VarChar(255)
-}
-
 model cozynet_chuni_static_characters {
   id          Int     @id
   str         String? @db.VarChar(255)
