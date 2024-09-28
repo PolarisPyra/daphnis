@@ -6,17 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    
     "prod-db:init": "npx prisma migrate dev --name init --schema prisma/schemas/daphnis/schema.prisma; npx prisma db pull --schema prisma/schemas/artemis/schema.prisma",
-    "prod-daphnis:migrate": "prisma migrate deploy --schema=./prisma/schemas/daphnis/schema.prisma",
+
+    "prod-daphnis:migrate:deploy": "prisma migrate deploy --schema=./prisma/schemas/daphnis/schema.prisma",
+    "prod-daphnis:migrate:generate": "prisma migrate dev --create-only --schema=./prisma/schemas/daphnis/schema.prisma",
+
     "dev-db:init": "npx prisma migrate dev --name init --schema prisma/schemas/daphnis/schema.prisma; npx prisma db pull --schema prisma/schemas/artemis/schema.prisma",
-    "dev-daphnis:migrate": "prisma migrate dev  --schema=./prisma/schemas/daphnis/schema.prisma",
+   
     "dev-artemis:generate": "prisma generate  --schema=./prisma/schemas/artemis/schema.prisma",
     "dev-daphnis:generate": "prisma generate  --schema=./prisma/schemas/daphnis/schema.prisma",
+    
     "dev-daphnis:drop": "prisma migrate reset  --schema=./prisma/schemas/daphnis/schema.prisma",
     "dev-daphnis:pull": "npx prisma db pull --schema prisma/schemas/daphnis/schema.prisma",
     "dev-daphnis:push": "npx prisma db push --schema prisma/schemas/daphnis/schema.prisma",
 
-    
+    "dev-daphnis:migrate": "prisma migrate dev  --schema=./prisma/schemas/daphnis/schema.prisma",
+
     "lint": "next lint"
   },
   "dependencies": {
