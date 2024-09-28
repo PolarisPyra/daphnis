@@ -29,7 +29,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
-import { chuni_static_nameplate } from "@/prisma/schemas/daphnis/generated/daphnis";
+import { chuni_static_systemvoice } from "@/prisma/schemas/daphnis/generated/daphnis";
 import { getCurrentSystemVoice, updatePlayerSystemVoiceId } from "./actions";
 
 const getNamePlateTextures = (id: number | undefined) => {
@@ -39,7 +39,7 @@ const getNamePlateTextures = (id: number | undefined) => {
   return `systemVoiceThumbnails/CHU_UI_SystemVoice_${paddedId}.png`;
 };
 
-type systemvoice = chuni_static_nameplate;
+type systemvoice = chuni_static_systemvoice;
 
 type SystemVoiceSelectionProps = {
   playerSystemVoiceSelectionData: {
