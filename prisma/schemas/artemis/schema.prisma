@@ -120,6 +120,7 @@ model aime_user {
   mai2_profile_region                                              mai2_profile_region[]
   mai2_score_best                                                  mai2_score_best[]
   mai2_score_course                                                mai2_score_course[]
+  mai2_user_intimate                                               mai2_user_intimate[]
   mai2_user_rival_mai2_user_rival_rivalToaime_user                 mai2_user_rival[]                    @relation("mai2_user_rival_rivalToaime_user")
   mai2_user_rival_mai2_user_rival_userToaime_user                  mai2_user_rival[]                    @relation("mai2_user_rival_userToaime_user")
   maimai_playlog                                                   maimai_playlog[]
@@ -2140,6 +2141,9 @@ model mai2_profile_detail {
   playerNewRating          BigInt?
   dateTime                 BigInt?
   banState                 Int?
+  point                    Int?
+  totalPoint               Int?
+  friendRegistSkip         Int?      @db.SmallInt
   aime_user                aime_user @relation(fields: [user], references: [id], onDelete: Cascade, map: "mai2_profile_detail_ibfk_1")
 
   @@unique([user, version], map: "mai2_profile_detail_uk")
@@ -4193,6 +4197,7 @@ model mai2_item_favorite_music {
   id        Int       @id @default(autoincrement())
   user      Int
   musicId   Int
+  orderId   Int?
   aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, map: "mai2_item_favorite_music_ibfk_1")
 
   @@unique([user, musicId], map: "mai2_item_favorite_music_uk")
@@ -4490,4 +4495,15 @@ model chuni_static_avatar {
   texturePath       String? @db.VarChar(255)
 
   @@unique([version, avatarAccessoryId], map: "chuni_static_avatar_uk")
+}
+
+model mai2_user_intimate {
+  id                    Int       @id @default(autoincrement())
+  user                  Int
+  partnerId             Int
+  intimateLevel         Int
+  intimateCountRewarded Int
+  aime_user             aime_user @relation(fields: [user], references: [id], onDelete: Cascade, map: "mai2_user_intimate_ibfk_1")
+
+  @@unique([user, partnerId], map: "mai2_user_intimate_uk")
 }
