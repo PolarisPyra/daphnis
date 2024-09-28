@@ -52,50 +52,47 @@ model chuni_static_trophies {
   netOpenName String? @db.VarChar(255)
 }
 
-model linksharingtoken {
+model LinkSharingToken {
   id             String    @id
-  token          String    @unique(map: "LinkSharingToken_token_key")
+  token          String    @unique
   createdAt      DateTime  @default(now())
   userId         String
   tokenExpiredAt DateTime?
   playlogId      Int?
-  user           user      @relation(fields: [userId], references: [id], map: "LinkSharingToken_userId_fkey")
 
-  @@index([userId], map: "LinkSharingToken_userId_fkey")
+  user User @relation(fields: [userId], references: [id])
 }
 
-model passwordresettoken {
+model PasswordResetToken {
   id        String    @id
-  token     String    @unique(map: "PasswordResetToken_token_key")
+  token     String    @unique
   createdAt DateTime  @default(now())
   userId    String
   resetAt   DateTime?
-  user      user      @relation(fields: [userId], references: [id], map: "PasswordResetToken_userId_fkey")
 
-  @@index([userId], map: "PasswordResetToken_userId_fkey")
+  user User @relation(fields: [userId], references: [id])
 }
 
-model session {
+model Session {
   id        String   @id
   expiresAt DateTime
   userId    String
-  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Session_userId_fkey")
-
-  @@index([userId], map: "Session_userId_fkey")
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
-model user {
-  id                 String               @id
-  username           String               @unique(map: "User_username_key")
-  accessCode         String               @unique(map: "User_accessCode_key")
-  UserId             Int                  @unique(map: "User_UserId_key")
-  gameVersion        GameVersion          @default(Luminous)
+model User {
+  id          String      @id
+  sessions    Session[]
+  username    String      @unique
+  accessCode  String      @unique
+  UserId      Int         @unique
+  gameVersion GameVersion @default(Luminous)
+
   hashedPassword     String
-  email              String               @unique(map: "User_email_key")
-  role               user_role            @default(USER)
-  linksharingtoken   linksharingtoken[]
-  passwordresettoken passwordresettoken[]
-  session            session[]
+  email              String               @unique
+  role               UserRole             @default(USER)
+  PasswordResetToken PasswordResetToken[]
+  LinkSharingToken   LinkSharingToken[]
 }
 
 enum GameVersion {
@@ -107,7 +104,7 @@ enum GameVersion {
   New
 }
 
-enum user_role {
+enum UserRole {
   ADMIN
   USER
 }

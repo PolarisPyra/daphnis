@@ -19,7 +19,7 @@ export async function resetPassword(token: string, data: FormData) {
     };
   }
 
-  const passwordResetToken = await daphnis.passwordresettoken.findUnique({
+  const passwordResetToken = await daphnis.passwordResetToken.findUnique({
     where: {
       token,
       createdAt: { gt: new Date(Date.now() - 1000 * 60 * 60 * 4) },
@@ -44,7 +44,7 @@ export async function resetPassword(token: string, data: FormData) {
     },
   });
 
-  const updateToken = daphnis.passwordresettoken.update({
+  const updateToken = daphnis.passwordResetToken.update({
     where: {
       id: passwordResetToken.id,
     },

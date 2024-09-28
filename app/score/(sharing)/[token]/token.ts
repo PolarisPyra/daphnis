@@ -19,7 +19,7 @@ export async function generateShareToken(id: number): Promise<{
   }
   const gernatetoken = randomBytes(5).readUInt32BE(0).toString();
 
-  const token = await daphnis.linksharingtoken.create({
+  const token = await daphnis.linkSharingToken.create({
     data: {
       playlogId: id, // sets the playlog id
       id: randomUUID(), // generates a random primary id for the share token
@@ -33,7 +33,7 @@ export async function generateShareToken(id: number): Promise<{
 }
 
 export async function shareScore(token: string) {
-  const IsTokenValid = await daphnis.linksharingtoken.findUnique({
+  const IsTokenValid = await daphnis.linkSharingToken.findUnique({
     where: {
       token,
     },
