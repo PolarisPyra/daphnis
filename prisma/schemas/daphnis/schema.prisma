@@ -8,6 +8,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum GameVersion {
+  LuminousPlus
+  Luminous
+  SunPlus
+  Sun
+  NewPlus
+  New
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model chuni_rival_codes {
   id        Int     @id
   rivalCode String? @db.VarChar(255)
@@ -52,7 +66,7 @@ model chuni_static_trophies {
   netOpenName String? @db.VarChar(255)
 }
 
-model LinkSharingToken {
+model link_sharing_token {
   id             String    @id
   token          String    @unique
   createdAt      DateTime  @default(now())
@@ -60,51 +74,37 @@ model LinkSharingToken {
   tokenExpiredAt DateTime?
   playlogId      Int?
 
-  user User @relation(fields: [userId], references: [id])
+  user user @relation(fields: [userId], references: [id])
 }
 
-model PasswordResetToken {
+model password_reset_token {
   id        String    @id
   token     String    @unique
   createdAt DateTime  @default(now())
   userId    String
   resetAt   DateTime?
 
-  user User @relation(fields: [userId], references: [id])
+  user user @relation(fields: [userId], references: [id])
 }
 
-model Session {
+model session {
   id        String   @id
   expiresAt DateTime
   userId    String
-  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  user      user     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
-model User {
+model user {
   id          String      @id
-  sessions    Session[]
+  sessions    session[]
   username    String      @unique
   accessCode  String      @unique
   UserId      Int         @unique
   gameVersion GameVersion @default(Luminous)
 
   hashedPassword     String
-  email              String               @unique
-  role               UserRole             @default(USER)
-  PasswordResetToken PasswordResetToken[]
-  LinkSharingToken   LinkSharingToken[]
-}
-
-enum GameVersion {
-  LuminousPlus
-  Luminous
-  SunPlus
-  Sun
-  NewPlus
-  New
-}
-
-enum UserRole {
-  ADMIN
-  USER
+  email              String                 @unique
+  role               UserRole               @default(USER)
+  PasswordResetToken password_reset_token[]
+  LinkSharingToken   link_sharing_token[]
 }
