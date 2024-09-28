@@ -4533,22 +4533,6 @@ model sao_static_trace_table {
   Rate                  Int
 }
 
-model cozynet_static_characters {
-  id              Int      @id @default(autoincrement())
-  dataName        String?  @db.VarChar(255)
-  releaseTagName  String?  @db.VarChar(255)
-  netOpenName     String?  @db.VarChar(255)
-  disableFlag     Boolean?
-  name            String?  @db.VarChar(255)
-  sortName        String?  @db.VarChar(255)
-  works           String?  @db.VarChar(255)
-  illustratorName String?  @db.VarChar(255)
-  defaultHave     Boolean?
-  rareType        Int?
-  defaultImages   String?  @db.VarChar(255)
-  priority        Int?
-}
-
 model cozynet_static_tes_characters {
   id              Int      @id @default(autoincrement())
   dataName        String?  @unique(map: "dataName") @db.VarChar(255)
@@ -4575,4 +4559,53 @@ model chuni_static_avatar {
   texturePath       String? @db.VarChar(255)
 
   @@unique([version, avatarAccessoryId], map: "chuni_static_avatar_uk")
+}
+
+model a_cozynet_chuni_static_characters {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  imagePath   String? @db.VarChar(255)
+  sortName    String? @db.VarChar(255)
+  category    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+  rareType    String? @db.VarChar(255)
+}
+
+model a_cozynet_chuni_static_mapicon {
+  id        Int     @id
+  str       String? @db.VarChar(255)
+  imagePath String? @db.VarChar(255)
+  sortName  String? @db.VarChar(255)
+}
+
+model a_cozynet_chuni_static_nameplate {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  imagePath   String? @db.VarChar(255)
+  sortName    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+}
+
+model a_cozynet_chuni_static_systemvoice {
+  id        Int     @id
+  str       String? @db.VarChar(255)
+  imagePath String? @db.VarChar(255)
+  sortName  String? @db.VarChar(255)
+}
+
+model a_cozynet_chuni_static_trophies {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  rareType    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+}
+
+model cozynet_chuni_static_characters {
+  id          Int     @id
+  str         String? @db.VarChar(255)
+  imagePath   String? @db.VarChar(255)
+  sortName    String? @db.VarChar(255)
+  category    String? @db.VarChar(255)
+  netOpenName String? @db.VarChar(255)
+  rareType    String? @db.VarChar(255)
 }
