@@ -11,7 +11,7 @@ type LinkSharingToken = {
 
 export async function getSharedSong(token: string) {
   try {
-    const linkSharingToken = await daphnis.linkSharingToken.findFirst({
+    const linkSharingToken = await daphnis.linksharingtoken.findFirst({
       where: {
         token: token,
       },
@@ -164,7 +164,7 @@ export async function getSharedSong(token: string) {
 
 export async function getPlaylogId(playlogid: number) {
   try {
-    const tokens = (await daphnis.linkSharingToken.findMany({
+    const tokens = (await daphnis.linksharingtoken.findMany({
       where: {
         playlogId: playlogid,
       },

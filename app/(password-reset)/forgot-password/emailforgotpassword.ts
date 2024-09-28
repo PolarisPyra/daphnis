@@ -50,7 +50,7 @@ export async function EmailPasswordResetLink(data: FormData) {
     };
   }
 
-  const token = await daphnis.passwordResetToken.create({
+  const token = await daphnis.passwordresettoken.create({
     data: {
       id: randomUUID(),
       userId: user.id,
