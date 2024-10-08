@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 
@@ -25,12 +24,12 @@ const ImageCell: React.FC<ImageCellProps> = ({ jacketPath }) => {
         <img
           src={`/jacketArts/${formattedJacketPath}`}
           alt="Jacket"
-          className={`${isLoading ? "hidden" : ""}`}
+          className={`${isLoading ? "hidden" : ""} max-h-full max-w-full`}
           onLoad={handleImageLoad}
           onError={handleImageError}
         />
       ) : (
-        <Skeleton className="inline-block h-[100px] w-[100px]" />
+        <Skeleton className="block h-[100px] w-[100px]" />
       )}
     </div>
   );
