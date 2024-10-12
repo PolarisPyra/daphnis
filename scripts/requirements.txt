@@ -1,0 +1,4 @@
+sqlalchemy==1.4.46
+mysqlclient
+tqdm
+pyaml
