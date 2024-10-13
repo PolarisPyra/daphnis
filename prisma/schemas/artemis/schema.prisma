@@ -334,7 +334,7 @@ model chuni_item_login_bonus {
   version        Int
   presetId       Int
   bonusCount     Int       @default(0)
-  lastUpdateDate DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
+  lastUpdateDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
   isWatched      Boolean?  @default(false)
   isFinished     Boolean?  @default(false)
   aime_user      aime_user @relation(fields: [user], references: [id], onDelete: Cascade, map: "chuni_item_login_bonus_ibfk_1")
@@ -418,7 +418,7 @@ model chuni_item_print_state {
   id           Int       @id @default(autoincrement())
   user         Int
   hasCompleted Boolean   @default(false)
-  limitDate    DateTime  @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
+  limitDate    DateTime  @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
   placeId      Int?
   cardId       Int?
   gachaId      Int?
@@ -961,10 +961,10 @@ model chuni_static_gachas {
   ceilingCnt      Int?      @default(10)
   changeRateCnt1  Int?      @default(0)
   changeRateCnt2  Int?      @default(0)
-  startDate       DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
-  endDate         DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
-  noticeStartDate DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
-  noticeEndDate   DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
+  startDate       DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  endDate         DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeStartDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeEndDate   DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
 
   @@unique([version, gachaId, gachaName], map: "chuni_static_gachas_uk")
 }
@@ -1029,7 +1029,7 @@ model cxb_playlog {
   combo       Int?
   date_scored DateTime? @default(now()) @db.Timestamp(0)
   grade       Int?
-  aime_user   aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cxb_playlog_ibfk_1")
+  aime_user   aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "cxb_playlog_ibfk_1")
 
   @@index([user], map: "user")
 }
@@ -1041,7 +1041,7 @@ model cxb_profile {
   version   Int
   index     Int
   data      String    @db.LongText
-  aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cxb_profile_ibfk_1")
+  aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "cxb_profile_ibfk_1")
 
   @@unique([user, index], map: "cxb_profile_uk")
 }
@@ -1053,7 +1053,7 @@ model cxb_ranking {
   song_id   Int?
   score     Int?
   clear     Int?
-  aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cxb_ranking_ibfk_1")
+  aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "cxb_ranking_ibfk_1")
 
   @@unique([user, rev_id], map: "cxb_ranking_uk")
 }
@@ -1062,7 +1062,7 @@ model cxb_rev_energy {
   id        Int       @id @default(autoincrement())
   user      Int       @unique(map: "cxb_rev_energy_uk")
   energy    Int       @default(0)
-  aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cxb_rev_energy_ibfk_1")
+  aime_user aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "cxb_rev_energy_ibfk_1")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -1073,7 +1073,7 @@ model cxb_score {
   song_mcode   String?   @db.VarChar(7)
   song_index   Int?
   data         String?   @db.LongText
-  aime_user    aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "cxb_score_ibfk_1")
+  aime_user    aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "cxb_score_ibfk_1")
 
   @@unique([user, song_mcode, song_index], map: "cxb_score_uk")
 }
@@ -1110,7 +1110,7 @@ model diva_playlog {
   worst       Int?
   max_combo   Int?
   date_scored DateTime? @default(now()) @db.Timestamp(0)
-  aime_user   aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "diva_playlog_ibfk_1")
+  aime_user   aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "diva_playlog_ibfk_1")
 
   @@index([user], map: "user")
 }
@@ -1230,7 +1230,7 @@ model diva_score {
   sad        Int?
   worst      Int?
   max_combo  Int?
-  aime_user  aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "diva_score_ibfk_1")
+  aime_user  aime_user @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "diva_score_ibfk_1")
 
   @@unique([user, pv_id, difficulty, edition], map: "diva_score_uk")
 }
@@ -2331,10 +2331,10 @@ model mai2_static_cards {
   version         Int
   cardId          Int
   cardName        String    @db.VarChar(255)
-  startDate       DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
-  endDate         DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
-  noticeStartDate DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
-  noticeEndDate   DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
+  startDate       DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  endDate         DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeStartDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeEndDate   DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
   enabled         Boolean?  @default(true)
 
   @@unique([version, cardId, cardName], map: "mai2_static_cards_uk")
@@ -3044,11 +3044,11 @@ model ongeki_static_gachas {
   ceilingCnt      Int?      @default(10)
   changeRateCnt1  Int?      @default(0)
   changeRateCnt2  Int?      @default(0)
-  startDate       DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
-  endDate         DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
-  noticeStartDate DateTime? @default(dbgenerated("'2018-01-01 00:00:00'")) @db.Timestamp(0)
-  noticeEndDate   DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
-  convertEndDate  DateTime? @default(dbgenerated("'2038-01-01 00:00:00'")) @db.Timestamp(0)
+  startDate       DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  endDate         DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeStartDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeEndDate   DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  convertEndDate  DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
 
   @@unique([version, gachaId, gachaName], map: "ongeki_static_gachas_uk")
 }
@@ -3461,7 +3461,7 @@ model pokken_pokemon_data {
   bp_point_res            Int?
   bp_point_def            Int?
   bp_point_sp             Int?
-  aime_user               aime_user @relation(fields: [user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pokken_pokemon_data_ibfk_1")
+  aime_user               aime_user @relation(fields: [user], references: [id], onUpdate: Restrict, map: "pokken_pokemon_data_ibfk_1")
 
   @@unique([user, illustration_book_no], map: "pokken_pokemon_uk")
 }
@@ -4186,7 +4186,7 @@ model aime_user_game_locks {
   id         Int       @id @default(autoincrement())
   user       Int
   game       String    @db.VarChar(4)
-  expires_at DateTime? @default(dbgenerated("(now() + interval 15 minute)")) @db.Timestamp(0)
+  expires_at DateTime? @default(dbgenerated("(current_timestamp() + interval 15 minute)")) @db.Timestamp(0)
   extra      String?   @db.LongText
   aime_user  aime_user @relation(fields: [user], references: [id], onDelete: Cascade, map: "aime_user_game_locks_ibfk_1")
 
