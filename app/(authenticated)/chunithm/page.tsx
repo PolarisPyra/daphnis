@@ -20,11 +20,23 @@ import { ChunithmTopPlays } from "@/components/userRatingBaseList/page";
 import { ChunithmNextPlays } from "@/components/userRatingBaseNextList/page";
 import { getUserRatingBaseNextList } from "@/components/userRatingBaseNextList/action";
 import { KamaitachiExport } from "@/components/kamaitachi/kamaitachi";
+import { TeamCustomization } from "@/components/(customization)/teamcustomization/page";
+import { getCurrentTeams } from "@/components/(customization)/teamcustomization/actions";
 import Patcher from "@/components/patcher/page";
+
+
+const getAllChuniTeams = async () => {
+  const teams = await getCurrentTeams();
+  return { teams };
+};
+
+
 const getChuniTopPlays = async () => {
   const topPlays = await getUserRatingBaseList();
   return { topPlays };
 };
+
+
 const getChuniNextPlays = async () => {
   const nextPlays = await getUserRatingBaseNextList();
   return { nextPlays };
@@ -89,6 +101,8 @@ const Page = async () => {
   const AllStaticNameplates = await getAllNameplates();
   const AllSystemVoices = await getAllSystemVoices();
   const AllMapIcons = await getAllMapIcons();
+  const AllChuniTeams = await getAllChuniTeams();
+
   const NextChuniPlays = await getChuniNextPlays();
 
   const TopChuniPlays = await getChuniTopPlays();
@@ -136,6 +150,9 @@ const Page = async () => {
             </div>
             <div className="pt-4">
               <MapIconCustomization playerMapIconCustomization={AllMapIcons} />
+            </div>
+            <div className="pt-4">
+              <TeamCustomization teamSelectionData={AllChuniTeams} />
             </div>
           </div>
           <div></div>
