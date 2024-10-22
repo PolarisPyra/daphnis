@@ -53,3 +53,5 @@ export const getGrade = (score: number) => {
   if (score < 500000) return "D";
   return "";
 };
+
+
