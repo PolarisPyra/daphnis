@@ -1,7 +1,6 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { getDifficultyText } from "@/lib/helpers";
-import { Skeleton } from "../ui/skeleton";
 import ImageCell from "../scoreplaylog/image";
 
 type userRatingBaseList = {

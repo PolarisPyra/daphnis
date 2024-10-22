@@ -137,7 +137,7 @@ export async function getSongsWithTitles(userId: number) {
 
         const playCount =
           totalPlayCounts.find(
-            (countData) =>
+            (countData: any) =>
               countData.musicId === chuni_score_playlog.musicId &&
               countData.level === chuni_score_playlog.level,
           )?._count?._all || 0;
