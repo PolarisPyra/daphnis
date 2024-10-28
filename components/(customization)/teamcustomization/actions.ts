@@ -14,9 +14,8 @@ export async function getCurrentTeams() {
   // Fetch the current teamId from chuni_profile_data for this user
   const currentTeamData = await artemis.chuni_profile_data.findFirst({
     where: {
-        user: user.UserId,
-        version: await getSupportedVersionNumber(),
-      
+      user: user.UserId,
+      version: await getSupportedVersionNumber(),
     },
     select: {
       teamId: true,
@@ -36,10 +35,9 @@ export async function getCurrentTeams() {
   // Match chuni_profile_team id to chuni_profile_data id to get the team name
   return selectableTeams.map((team) => ({
     ...team,
-    isCurrent: team.id === currentTeamData?.teamId
+    isCurrent: team.id === currentTeamData?.teamId,
   }));
 }
-
 
 export async function updatePlayerTeam(teamId: number) {
   const { user } = await getAuth();
@@ -69,6 +67,27 @@ export async function updatePlayerTeam(teamId: number) {
     return updatePlayerTeam;
   } catch (error) {
     console.error("Error updating trophy:", error);
+    throw error;
+  }
+}
+
+export async function addTeam(teamName: string) {
+  const { user } = await getAuth();
+
+  if (!user || !user.accessCode) {
+    throw new Error("User is not authenticated or accessCode is missing");
+  }
+
+  try {
+    const newTeam = await artemis.chuni_profile_team.create({
+      data: {
+        teamName,
+      },
+    });
+
+    return newTeam;
+  } catch (error) {
+    console.error("Error adding new team:", error);
     throw error;
   }
 }

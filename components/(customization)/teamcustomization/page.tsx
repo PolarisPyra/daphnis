@@ -28,8 +28,9 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
-import { getCurrentTeams, updatePlayerTeam } from "./actions";
+import { getCurrentTeams, updatePlayerTeam, addTeam } from "./actions";
 import { chuni_profile_team } from "@/prisma/schemas/artemis/generated/artemis";
+import { Input } from "@/components/ui/input";
 
 type teams = chuni_profile_team;
 
@@ -46,6 +47,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
     team: z.number({
       required_error: "Please select a team",
     }),
+    newTeamName: z.string().min(1, "Team name is required"),
   });
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -79,16 +81,25 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
 
     updatePlayerTeam(newTeamId).then(() => {
       setTeamId(newTeamId);
-  
     });
 
     toast({
-      title: "You submitted the following values:",
+      title: "Team updated",
       description: (
         <pre className="mt-2 w-[340px] rounded-md p-4">
           <code className="text-white">Team updated</code>
         </pre>
       ),
+    });
+  }
+
+  function onAddTeam(data: z.infer<typeof FormSchema>) {
+    addTeam(data.newTeamName).then(() => {
+      toast({
+        title: "New Team Added",
+        description: `Team "${data.newTeamName}" has been added!`,
+      });
+      form.reset(); // Clear the input field after successful addition
     });
   }
 
@@ -157,7 +168,30 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
               )}
             />
             <div className="flex justify-end">
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Update Team</Button>
+            </div>
+          </form>
+        </Form>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onAddTeam)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="newTeamName"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="pb-2">New Team Name</FormLabel>
+                  <Input
+                    placeholder="Enter new team name"
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex justify-end">
+              <Button type="submit">Add Team</Button>
             </div>
           </form>
         </Form>
