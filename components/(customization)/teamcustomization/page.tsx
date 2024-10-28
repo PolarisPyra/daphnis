@@ -180,7 +180,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
               name="newTeamName"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel className="pb-2">New Team Name</FormLabel>
+                  <FormLabel className="pb-2">Create Team</FormLabel>
                   <Input
                     placeholder="Enter new team name"
                     value={field.value}
@@ -191,7 +191,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
               )}
             />
             <div className="flex justify-end">
-              <Button type="submit">Add Team</Button>
+              <Button type="submit">Create Team</Button>
             </div>
           </form>
         </Form>
