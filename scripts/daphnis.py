@@ -14,7 +14,7 @@ MAPICON_TABLE_NAME       =  'chuni_static_mapicon'
 DAPHNIS_RIVAL_TABLE_NAME =  'chuni_rival_codes'
 
 def read_config():
-    with open("C:\\Users\\Polaris\\Documents\\artemis\\config\\core.yaml", 'r') as file:
+    with open("/home/polaris/projects/sega/artemis/config/core.yaml", 'r') as file:
         return yaml.safe_load(file)
 
 def create_db_engine(db_config):
@@ -27,11 +27,11 @@ def create_db_engine(db_config):
         return None
 
 
-    
+
 def parse_chara_xml(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()
-    
+
     return {
         'id': int(root.find("name/id").text),
         'dataName': root.find('dataName').text,
@@ -46,7 +46,7 @@ def parse_chara_xml(file_path):
 def parse_nameplate_xml(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()
-    
+
     return {
         "id": int(root.find("name/id").text),
         'dataName': root.find('dataName').text,
@@ -59,7 +59,7 @@ def parse_nameplate_xml(file_path):
 def parse_systemvoice_xml(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()
-    
+
     return {
         "id": int(root.find("name/id").text),
         'dataName': root.find('dataName').text,
@@ -71,9 +71,9 @@ def parse_systemvoice_xml(file_path):
 def parse_trophy_xml(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()
-    
+
     return {
-        "id": int(root.find("name/id").text), 
+        "id": int(root.find("name/id").text),
         'dataName': root.find('dataName').text,
         'netOpenName': root.find('netOpenName/str').text,
         'name': root.find('name/str').text,
@@ -84,7 +84,7 @@ def parse_trophy_xml(file_path):
 def parse_mapicon_xml(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()
-    
+
     return {
         "id": int(root.find("name/id").text),
         'dataName': root.find('dataName').text,
@@ -92,7 +92,7 @@ def parse_mapicon_xml(file_path):
         'sortName': root.find('sortName').text,
         'imagePath': root.find('image/path').text,
     }
-    
+
 def ensure_tables(engine):
     tables = {
         CHARACTER_TABLE_NAME: f"""
@@ -106,7 +106,7 @@ def ensure_tables(engine):
                 rareType VARCHAR(255) COLLATE utf8mb4_unicode_ci
             ) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
         """,
-       
+
         NAMEPLATE_TABLE_NAME: f"""
             CREATE TABLE IF NOT EXISTS {NAMEPLATE_TABLE_NAME} (
                 id INT PRIMARY KEY,
@@ -158,26 +158,26 @@ def ensure_tables(engine):
                     print(f"'{table_name}' table created successfully!")
                 else:
                     print(f"'{table_name}' table already exists.")
-                    
+
 def insert_chara_data(engine, data):
     with engine.connect() as connection:
         with connection.begin():
             connection.execute(text(f"""
                 DELETE FROM {CHARACTER_TABLE_NAME} WHERE id = :id
-            """), {"id": data['id']})  
-            
+            """), {"id": data['id']})
+
             connection.execute(text(f"""
                 INSERT INTO {CHARACTER_TABLE_NAME} (id, str, imagePath, sortName, category, netOpenName, rareType)
                 VALUES (:id, :name, :defaultImages, :sortName, :works, :netOpenName, :rareType)
             """), data)
-            
+
 def insert_nameplate_data(engine, data):
     with engine.connect() as connection:
         with connection.begin():
             connection.execute(text(f"""
                 DELETE FROM {NAMEPLATE_TABLE_NAME} WHERE id = :id
             """), {"id": data['id']})
-            
+
             connection.execute(text(f"""
                 INSERT INTO {NAMEPLATE_TABLE_NAME} (id, str, imagePath, sortName, netOpenName)
                 VALUES (:id, :name, :imagePath, :sortName, :netOpenName)
@@ -189,7 +189,7 @@ def insert_systemvoice_data(engine, data):
             connection.execute(text(f"""
                 DELETE FROM {SYSTEMVOICE_TABLE_NAME} WHERE id = :id
             """), {"id": data['id']})
-            
+
             connection.execute(text(f"""
                 INSERT INTO {SYSTEMVOICE_TABLE_NAME} (id, str, imagePath, sortName)
                 VALUES (:id, :name, :imagePath, :sortName)
@@ -201,8 +201,8 @@ def insert_trophy_data(engine, data):
         with connection.begin():
             connection.execute(text(f"""
                 DELETE FROM {TROPHY_TABLE_NAME} WHERE id = :id
-            """), {"id": data['id']}) 
-            
+            """), {"id": data['id']})
+
             connection.execute(text(f"""
                 INSERT INTO {TROPHY_TABLE_NAME} (id, str, rareType, netOpenName)
                 VALUES (:id, :name, :rareType, :netOpenName)
@@ -214,41 +214,41 @@ def insert_mapicon_data(engine, data):
             connection.execute(text(f"""
                 DELETE FROM {MAPICON_TABLE_NAME} WHERE id = :id
             """), {"id": data['id']})
-            
+
             connection.execute(text(f"""
                 INSERT INTO {MAPICON_TABLE_NAME} (id, str, imagePath, sortName)
                 VALUES (:id, :name, :imagePath, :sortName)
             """), data)
-            
+
 def insert_cozynet_rival_data(engine, data):
     with engine.connect() as connection:
         with connection.begin():
             connection.execute(text(f"""
                 DELETE FROM {DAPHNIS_RIVAL_TABLE_NAME} WHERE id = :id
             """), {"id": data['id']})
-            
+
             connection.execute(text(f"""
                 INSERT INTO {DAPHNIS_RIVAL_TABLE_NAME} (id, rivalCode)
                 VALUES (:id, :rivalCode)
-            """), data)           
+            """), data)
 def main():
     config = read_config()
     engine = create_db_engine(config['database'])
     if not engine:
         return
-    
+
     ensure_tables(engine)
-    
-    rootDir = "C:\\Users\\Polaris\\Documents\\Chunithm Luminous Plus"
+
+    rootDir = "/home/polaris/media/windows/Users/polaris/Documents/Arcade/Chunithm Luminous Plus English"
     filesToSearch = {"Chara.xml", "NamePlate.xml", "SystemVoice.xml", "Trophy.xml", "MapIcon.xml"}
 
     GREEN = '\033[92m'
     RESET = '\033[0m'
-    
+
     bar_format = f'{GREEN}{{desc}}{GREEN}|{{bar}}{GREEN}|{RESET} {{n_fmt}}/{{total_fmt}} [{{elapsed}}<{{remaining}}, {{postfix}}]'
-    
+
     fileSet = set()
-    
+
     for relativePath, dirs, files in os.walk(rootDir):
         for file in files:
             if file in filesToSearch:
@@ -256,7 +256,7 @@ def main():
                 fileSet.add((file, fullPath))
 
     with tqdm(total=len(fileSet), desc="Building database tables", unit="file", bar_format=bar_format, colour='green') as pbar:
-        for file, fullPath in fileSet:       
+        for file, fullPath in fileSet:
             if file == "Chara.xml":
                 chara_data = parse_chara_xml(fullPath)
                 insert_chara_data(engine, chara_data)
