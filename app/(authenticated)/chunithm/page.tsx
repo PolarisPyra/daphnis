@@ -24,18 +24,15 @@ import { TeamCustomization } from "@/components/(customization)/teamcustomizatio
 import { getCurrentTeams } from "@/components/(customization)/teamcustomization/actions";
 import Patcher from "@/components/patcher/page";
 
-
 const getAllChuniTeams = async () => {
   const teams = await getCurrentTeams();
   return { teams };
 };
 
-
 const getChuniTopPlays = async () => {
   const topPlays = await getUserRatingBaseList();
   return { topPlays };
 };
-
 
 const getChuniNextPlays = async () => {
   const nextPlays = await getUserRatingBaseNextList();
