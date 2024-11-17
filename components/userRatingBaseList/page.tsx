@@ -2,21 +2,7 @@
 import React, { FC } from "react";
 import { getDifficultyText } from "@/lib/helpers";
 import ImageCell from "../scoreplaylog/image";
-
-type userRatingBaseList = {
-  title: string;
-  artist: string;
-  genre: string;
-  chartId: string | number;
-  level: string | number;
-  jacketPath: string;
-  rating: number;
-  version: number;
-  index: number;
-  musicId: number | null;
-  difficultId: number | null;
-  score: number | null;
-};
+import { userRatingBaseList } from "@/lib/types";
 
 type chunithmTopPlays = {
   chuniProfileTopPlays: {

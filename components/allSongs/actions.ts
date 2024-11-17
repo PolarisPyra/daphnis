@@ -9,6 +9,9 @@ export async function getChunithmSongList() {
     return await artemis.chuni_static_music.findMany({
       where: {
         version: supportedVersionNumber,
+        NOT: {
+          AND: [{ chartId: 5 }, { worldsEndTag: "Invalid" }],
+        },
       },
       select: {
         songId: true,

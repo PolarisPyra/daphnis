@@ -3,23 +3,43 @@ import React, { FC, useMemo, useState } from "react";
 import ImageCell from "../scoreplaylog/image";
 import type * as Prisma from "@prisma/client";
 import { Input } from "../ui/input";
-type artemis = Prisma.PrismaClient;
+import { getDifficultyText } from "@/lib/helpers";
+import { allSongs } from "@/lib/types";
 
 type ChunithmAllSongs = {
   chuniAllSongs: {
-    allChunithmSongs: artemis[];
+    allChunithmSongs: allSongs[];
   };
 };
 
 export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter songs by title based on the search query
-  const filteredSongs = useMemo(() => {
-    return chuniAllSongs.allChunithmSongs.filter(
+  // Group and filter songs by songId
+  const groupedAndFilteredSongs = useMemo(() => {
+    const filteredSongs = chuniAllSongs.allChunithmSongs.filter(
       (song) =>
         song.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
         song.level !== 0,
+    );
+
+    return Object.values(
+      filteredSongs.reduce(
+        (acc, song) => {
+          if (!acc[song.songId]) {
+            acc[song.songId] = {
+              ...song,
+              levels: [],
+            };
+          }
+          acc[song.songId].levels.push({
+            level: song.level,
+            chartId: song.chartId,
+          });
+          return acc;
+        },
+        {} as Record<string, any>,
+      ),
     );
   }, [searchQuery, chuniAllSongs.allChunithmSongs]);
 
@@ -35,7 +55,7 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
         />
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-        {filteredSongs.map((song, index) => (
+        {groupedAndFilteredSongs.map((song, index) => (
           <div
             key={index}
             className="flex flex-col items-center rounded-sm bg-muted p-3"
@@ -46,24 +66,19 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
               </div>
             </div>
             <div className="mt-2 w-full text-center">
-              <h3
-                className="truncate py-1 text-sm font-semibold text-white"
-                title={song.title}
-              >
+              <h3 className="truncate py-1 text-sm font-semibold text-white">
                 {song.title}
               </h3>
-              <p
-                className="truncate py-1 text-xs text-white"
-                title={song.artist}
-              >
-                {song.artist}
-              </p>
-              <p
-                className="truncate py-1 text-xs text-white"
-                title={song.artist}
-              >
-                {song.chartId === 5 ? `WORLDS END: ${song.level}` : song.level}
-              </p>
+              <p className="truncate py-1 text-xs text-white">{song.artist}</p>
+              <div className="flex flex-wrap justify-center gap-1">
+                {song.levels.map(
+                  (level: { level: number; chartId: number }, i: number) => (
+                    <p key={i} className="truncate py-1 text-xs text-white">
+                      {getDifficultyText(level.chartId)}: {level.level}
+                    </p>
+                  ),
+                )}
+              </div>
             </div>
           </div>
         ))}
