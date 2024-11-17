@@ -23,7 +23,7 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
         song.level !== 0,
     );
 
-    return Object.values(
+    const grouped = Object.values(
       filteredSongs.reduce(
         (acc, song) => {
           const songId = song.songId;
@@ -44,6 +44,9 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
         {} as Record<string, any>,
       ),
     );
+
+    // Sort by songId in descending order (newest to oldest)
+    return grouped.sort((a, b) => Number(b.id) - Number(a.id));
   }, [searchQuery, chuniAllSongs.allChunithmSongs]);
 
   return (

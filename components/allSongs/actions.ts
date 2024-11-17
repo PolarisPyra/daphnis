@@ -15,6 +15,7 @@ export async function getChunithmSongList() {
       },
       select: {
         songId: true,
+        id: true,
         chartId: true,
         title: true,
         artist: true,
