@@ -1,20 +1,10 @@
-export const getDifficultyClass = (level: number) => {
-  switch (level) {
-    case 0:
-      return "bg-green-500"; // Green for basic
-    case 1:
-      return "bg-yellow-500"; // Yellow for advance
-    case 2:
-      return "bg-red-500"; // Red for expert
-    case 3:
-      return "bg-purple-500"; // Purple for master
-    case 4:
-      return "bg-yellow-500"; // Example of gradient background
-    case 5:
-      return "bg-black"; // Black for worlds end
-    default:
-      return "bg-gray-500"; // Default to gray background for unknown difficulty
-  }
+export const DifficultyColors = {
+  0: "bg-emerald-500", // BASIC
+  1: "bg-yellow-500", // ADVANCED
+  2: "bg-red-500", // EXPERT
+  3: "bg-purple-500", // MASTER
+  4: "bg-red-300", // ULTIMA
+  5: "bg-gray-300", // Worlds End
 };
 
 export const getDifficultyText = (chartId: number | null) => {
@@ -53,5 +43,3 @@ export const getGrade = (score: number) => {
   if (score < 500000) return "D";
   return "";
 };
-
-
