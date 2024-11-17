@@ -20,7 +20,8 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
     const filteredSongs = chuniAllSongs.allChunithmSongs.filter(
       (song) =>
         song.title?.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        song.level !== 0,
+        song.level !== 0 &&
+        Number(song.songId) <= 8000, // hiding we until either importer is changed or i figure out something smarter
     );
 
     const grouped = Object.values(
@@ -46,7 +47,7 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
     );
 
     // Sort by songId in descending order (newest to oldest)
-    return grouped.sort((a, b) => Number(b.id) - Number(a.id));
+    return grouped.sort((a, b) => Number(b.songId) - Number(a.songId));
   }, [searchQuery, chuniAllSongs.allChunithmSongs]);
 
   return (
