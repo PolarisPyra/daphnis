@@ -1,12 +1,3 @@
-export const DifficultyColors = {
-  0: "bg-emerald-500", // BASIC
-  1: "bg-yellow-500", // ADVANCED
-  2: "bg-red-500", // EXPERT
-  3: "bg-purple-500", // MASTER
-  4: "bg-red-300", // ULTIMA
-  5: "bg-gray-300", // Worlds End
-};
-
 export const getDifficultyText = (chartId: number | null) => {
   switch (chartId) {
     case 0:

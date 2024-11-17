@@ -2,7 +2,6 @@
 import React, { FC, useMemo, useState } from "react";
 import ImageCell from "../scoreplaylog/image";
 import type * as Prisma from "@prisma/client";
-import { DifficultyColors } from "@/lib/helpers";
 import { Input } from "../ui/input";
 type artemis = Prisma.PrismaClient;
 
@@ -87,11 +86,7 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
                     diff.level !== 0 && (
                       <div
                         key={diff.chartId}
-                        className={`${
-                          DifficultyColors[
-                            diff.chartId as keyof typeof DifficultyColors
-                          ] || "bg-red-500"
-                        } flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white shadow`}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-xs font-bold text-black shadow"
                       >
                         {diff.level}
                       </div>
