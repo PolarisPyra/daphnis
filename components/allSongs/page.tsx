@@ -19,23 +19,26 @@ export const AllChunithmSongs: FC<ChunithmAllSongs> = ({ chuniAllSongs }) => {
   const groupedAndFilteredSongs = useMemo(() => {
     const filteredSongs = chuniAllSongs.allChunithmSongs.filter(
       (song) =>
-        song.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        song.title?.toLowerCase().includes(searchQuery.toLowerCase()) &&
         song.level !== 0,
     );
 
     return Object.values(
       filteredSongs.reduce(
         (acc, song) => {
-          if (!acc[song.songId]) {
-            acc[song.songId] = {
+          const songId = song.songId;
+          if (songId !== null && !acc[songId]) {
+            acc[songId] = {
               ...song,
               levels: [],
             };
           }
-          acc[song.songId].levels.push({
-            level: song.level,
-            chartId: song.chartId,
-          });
+          if (songId !== null) {
+            acc[songId].levels.push({
+              level: song.level,
+              chartId: song.chartId,
+            });
+          }
           return acc;
         },
         {} as Record<string, any>,

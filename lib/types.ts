@@ -1,10 +1,11 @@
 export type allSongs = {
-  songId: number;
-  title: string;
-  artist: string;
-  level: number;
-  chartId: number;
-  jacketPath: string;
+  title: string | null;
+  jacketPath: string | null;
+  songId: number | null;
+  chartId: number | null;
+  artist: string | null;
+  level: number | null;
+  genre: string | null;
 };
 
 export type userRatingBaseList = {
