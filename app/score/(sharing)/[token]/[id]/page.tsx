@@ -1,6 +1,6 @@
 import { getAuth } from "@/auth/queries/getauth";
 import { shareScore } from "../token";
-import { getDifficultyClass, getDifficultyText, getGrade } from "@/lib/helpers";
+import { getGrade } from "@/lib/helpers";
 import {
   type chuni_score_playlog,
   chuni_static_music,
