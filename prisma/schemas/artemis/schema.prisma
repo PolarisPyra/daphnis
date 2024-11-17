@@ -334,7 +334,7 @@ model chuni_item_login_bonus {
   version        Int
   presetId       Int
   bonusCount     Int       @default(0)
-  lastUpdateDate DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
+  lastUpdateDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
   isWatched      Boolean?  @default(false)
   isFinished     Boolean?  @default(false)
   aime_user      aime_user @relation(fields: [user], references: [id], onDelete: Cascade, map: "chuni_item_login_bonus_ibfk_1")
@@ -418,7 +418,7 @@ model chuni_item_print_state {
   id           Int       @id @default(autoincrement())
   user         Int
   hasCompleted Boolean   @default(false)
-  limitDate    DateTime  @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
+  limitDate    DateTime  @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
   placeId      Int?
   cardId       Int?
   gachaId      Int?
@@ -961,10 +961,10 @@ model chuni_static_gachas {
   ceilingCnt      Int?      @default(10)
   changeRateCnt1  Int?      @default(0)
   changeRateCnt2  Int?      @default(0)
-  startDate       DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
-  endDate         DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
-  noticeStartDate DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
-  noticeEndDate   DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
+  startDate       DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  endDate         DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeStartDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeEndDate   DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
 
   @@unique([version, gachaId, gachaName], map: "chuni_static_gachas_uk")
 }
@@ -2331,10 +2331,10 @@ model mai2_static_cards {
   version         Int
   cardId          Int
   cardName        String    @db.VarChar(255)
-  startDate       DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
-  endDate         DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
-  noticeStartDate DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
-  noticeEndDate   DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
+  startDate       DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  endDate         DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeStartDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeEndDate   DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
   enabled         Boolean?  @default(true)
 
   @@unique([version, cardId, cardName], map: "mai2_static_cards_uk")
@@ -3044,11 +3044,11 @@ model ongeki_static_gachas {
   ceilingCnt      Int?      @default(10)
   changeRateCnt1  Int?      @default(0)
   changeRateCnt2  Int?      @default(0)
-  startDate       DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
-  endDate         DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
-  noticeStartDate DateTime? @default(dbgenerated("('2017-12-31 19:00:00')")) @db.Timestamp(0)
-  noticeEndDate   DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
-  convertEndDate  DateTime? @default(dbgenerated("('2037-12-31 19:00:00')")) @db.Timestamp(0)
+  startDate       DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  endDate         DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeStartDate DateTime? @default(dbgenerated("('2018-01-01 00:00:00')")) @db.Timestamp(0)
+  noticeEndDate   DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
+  convertEndDate  DateTime? @default(dbgenerated("('2038-01-01 00:00:00')")) @db.Timestamp(0)
 
   @@unique([version, gachaId, gachaName], map: "ongeki_static_gachas_uk")
 }
