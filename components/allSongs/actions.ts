@@ -23,7 +23,7 @@ export async function getChunithmSongList() {
         genre: true,
         jacketPath: true,
       },
-      orderBy: [{ songId: "asc" }, { chartId: "desc" }],
+      orderBy: [{ songId: "desc" }, { chartId: "desc" }],
     });
   } catch (error) {
     console.error("Error fetching song list:", error);
