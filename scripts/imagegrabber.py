@@ -2,8 +2,7 @@ import os
 import re
 from pathlib import Path
 
-from PIL import Image
-from tqdm import tqdm
+from wand.image import Image
 
 
 def find_dds_files(source_folders, file_pattern=None):
@@ -16,17 +15,28 @@ def find_dds_files(source_folders, file_pattern=None):
     return dds_files
 
 
-def convert_dds_to_png(dds_file_path, png_file_path):
-    # Assuming .dds files are readable by Pillow or have been pre-converted
-    with Image.open(dds_file_path) as img:
-        img.save(png_file_path, "PNG")
+def print_progress_bar(iteration, total, prefix="", suffix="Complete", length=50, fill="█"):
+    percent = "{0:.1f}".format(100 * (iteration / float(total)))
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + "-" * (length - filled_length)
+    print(f"\r{prefix} |{bar}| {percent}% {suffix}", end="\r" if iteration < total else "\n")
 
 
-def process_files(files, destination_folder, progress_prefix):
-    for file_path in tqdm(files, desc=progress_prefix, unit="file"):
+def convert_dds_to_png(dds_file_path, png_file_path, resize_percent=None):
+    with Image(filename=dds_file_path) as img:
+        if resize_percent:
+            img.resize(int(img.width * resize_percent), int(img.height * resize_percent))
+        img.format = "png"
+        img.save(filename=png_file_path)
+
+
+def process_files(files, destination_folder, progress_prefix, resize_percent=None):
+    total = len(files)
+    for i, file_path in enumerate(files, 1):
+        print_progress_bar(i, total, prefix=progress_prefix)
         file_name = os.path.splitext(os.path.basename(file_path))[0] + ".png"
         png_file_path = os.path.join(destination_folder, file_name)
-        convert_dds_to_png(file_path, png_file_path)
+        convert_dds_to_png(file_path, png_file_path, resize_percent)
 
 
 def process_nameplates(source_folders, destination_folder, progress_prefix):
@@ -71,7 +81,7 @@ def process_avatarAccessory(source_folders, destination_folder, progress_prefix)
     if not os.path.exists(destination_folder):
         os.makedirs(destination_folder)
 
-    process_files(accessory_files, destination_folder, progress_prefix)
+    process_files(accessory_files, destination_folder, progress_prefix, resize_percent=0.5)
 
 
 def process_partners(source_folders, destination_chunithm, destination_chusan):
