@@ -43,15 +43,22 @@ type TeamSelectionProps = {
 export const TeamCustomization: FC<TeamSelectionProps> = ({
   teamSelectionData,
 }) => {
-  const FormSchema = z.object({
+  const TeamSelectionSchema = z.object({
     team: z.number({
       required_error: "Please select a team",
     }),
+  });
+
+  const TeamCreationSchema = z.object({
     newTeamName: z.string().min(1, "Team name is required"),
   });
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const teamSelectionForm = useForm<z.infer<typeof TeamSelectionSchema>>({
+    resolver: zodResolver(TeamSelectionSchema),
+  });
+
+  const teamCreationForm = useForm<z.infer<typeof TeamCreationSchema>>({
+    resolver: zodResolver(TeamCreationSchema),
   });
 
   const [teamID, setTeamId] = useState<number | undefined>(undefined);
@@ -64,7 +71,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
           const selectedTeam = data.find((team) => team.isCurrent);
           if (selectedTeam) {
             setTeamId(selectedTeam.id!);
-            form.setValue("team", selectedTeam.id);
+            teamSelectionForm.setValue("team", selectedTeam.id);
           }
         }
       } catch (error) {
@@ -75,7 +82,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
     fetchTeams();
   }, []);
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmitTeamSelection(data: z.infer<typeof TeamSelectionSchema>) {
     const defaultTeamId = teamID;
     const newTeamId = data.team ?? defaultTeamId;
 
@@ -93,23 +100,26 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
     });
   }
 
-  function onAddTeam(data: z.infer<typeof FormSchema>) {
+  function onSubmitTeamCreation(data: z.infer<typeof TeamCreationSchema>) {
     addTeam(data.newTeamName).then(() => {
       toast({
         title: "New Team Added",
         description: `Team "${data.newTeamName}" has been added!`,
       });
-      form.reset(); // Clear the input field after successful addition
+      teamCreationForm.reset(); // Clear the input field after successful addition
     });
   }
 
   return (
     <main className="flex flex-col items-center space-y-6">
       <div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <Form {...teamSelectionForm}>
+          <form
+            onSubmit={teamSelectionForm.handleSubmit(onSubmitTeamSelection)}
+            className="space-y-6"
+          >
             <FormField
-              control={form.control}
+              control={teamSelectionForm.control}
               name="team"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
@@ -144,7 +154,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
                                 value={team.id.toString()}
                                 key={team.id}
                                 onSelect={() => {
-                                  form.setValue("team", team.id);
+                                  teamSelectionForm.setValue("team", team.id);
                                 }}
                               >
                                 <Check
@@ -173,10 +183,13 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
           </form>
         </Form>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onAddTeam)} className="space-y-6">
+        <Form {...teamCreationForm}>
+          <form
+            onSubmit={teamCreationForm.handleSubmit(onSubmitTeamCreation)}
+            className="space-y-6"
+          >
             <FormField
-              control={form.control}
+              control={teamCreationForm.control}
               name="newTeamName"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
