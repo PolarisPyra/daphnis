@@ -115,8 +115,8 @@ const Page = async () => {
 
   return (
     <div className="p-3">
-      <Tabs defaultValue="scores">
-        <TabsList className="md:flex-0 flex overflow-x-auto">
+      <Tabs defaultValue="scores" className="mx-auto w-full max-w-4xl">
+        <TabsList className="grid h-auto grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
           <TabsTrigger value="scores">Scores</TabsTrigger>
           <TabsTrigger value="customize">Customize</TabsTrigger>
           <TabsTrigger value="TopPlays">Top Plays</TabsTrigger>
