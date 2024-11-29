@@ -43,22 +43,22 @@ type TeamSelectionProps = {
 export const TeamCustomization: FC<TeamSelectionProps> = ({
   teamSelectionData,
 }) => {
-  const TeamSelectionSchema = z.object({
+  const teamSelectionSchema = z.object({
     team: z.number({
       required_error: "Please select a team",
     }),
   });
 
-  const TeamCreationSchema = z.object({
+  const teamCreationSchema = z.object({
     newTeamName: z.string().min(1, "Team name is required"),
   });
 
-  const teamSelectionForm = useForm<z.infer<typeof TeamSelectionSchema>>({
-    resolver: zodResolver(TeamSelectionSchema),
+  const teamSelectionForm = useForm<z.infer<typeof teamSelectionSchema>>({
+    resolver: zodResolver(teamSelectionSchema),
   });
 
-  const teamCreationForm = useForm<z.infer<typeof TeamCreationSchema>>({
-    resolver: zodResolver(TeamCreationSchema),
+  const teamCreationForm = useForm<z.infer<typeof teamCreationSchema>>({
+    resolver: zodResolver(teamCreationSchema),
   });
 
   const [teamID, setTeamId] = useState<number | undefined>(undefined);
@@ -82,7 +82,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
     fetchTeams();
   }, []);
 
-  function onSubmitTeamSelection(data: z.infer<typeof TeamSelectionSchema>) {
+  function onSubmitTeamSelection(data: z.infer<typeof teamSelectionSchema>) {
     const defaultTeamId = teamID;
     const newTeamId = data.team ?? defaultTeamId;
 
@@ -100,7 +100,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
     });
   }
 
-  function onSubmitTeamCreation(data: z.infer<typeof TeamCreationSchema>) {
+  function onSubmitTeamCreation(data: z.infer<typeof teamCreationSchema>) {
     addTeam(data.newTeamName).then(() => {
       toast({
         title: "New Team Added",
