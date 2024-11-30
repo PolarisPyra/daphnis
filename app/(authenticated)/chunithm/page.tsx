@@ -115,7 +115,7 @@ const Page = async () => {
 
   return (
     <div className="p-3">
-      <Tabs defaultValue="scores" className="mx-auto w-full max-w-4xl">
+      <Tabs defaultValue="scores" className="mx-auto w-full">
         <TabsList className="grid h-auto grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
           <TabsTrigger value="scores">Scores</TabsTrigger>
           <TabsTrigger value="customize">Customize</TabsTrigger>
