@@ -23,8 +23,8 @@ import { KamaitachiExport } from "@/components/kamaitachi/kamaitachi";
 import { TeamCustomization } from "@/components/(customization)/teamcustomization/page";
 import { getCurrentTeams } from "@/components/(customization)/teamcustomization/actions";
 import Patcher from "@/components/patcher/page";
-import { getChunithmSongList } from "@/components/allSongs/actions";
-import { AllChunithmSongs } from "@/components/allSongs/page";
+import { getChunithmSongList } from "@/components/allsongs/actions";
+import { AllChunithmSongs } from "@/components/allsongs/page";
 
 const getAllSongs = async () => {
   const allChunithmSongs = await getChunithmSongList();
@@ -114,9 +114,9 @@ const Page = async () => {
   const HotChuniPlays = await getChuniHotPlays();
 
   return (
-    <div className="p-3">
+    <div className="m p-3">
       <Tabs defaultValue="scores" className="mx-auto w-full">
-        <TabsList className="grid h-auto grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+        <TabsList className="grid h-auto grid-cols-2 p-2 sm:grid-cols-4 lg:grid-cols-9">
           <TabsTrigger value="scores">Scores</TabsTrigger>
           <TabsTrigger value="customize">Customize</TabsTrigger>
           <TabsTrigger value="TopPlays">Top Plays</TabsTrigger>
@@ -124,7 +124,7 @@ const Page = async () => {
           <TabsTrigger value="NextPlays">Next Plays</TabsTrigger>
           <TabsTrigger value="Patcher">Patcher</TabsTrigger>
           <TabsTrigger value="AllSongs">All Songs</TabsTrigger>
-          <TabsTrigger value="KamaitachiExport">Kamaitachi Export</TabsTrigger>
+          <TabsTrigger value="KamaitachiExport">Kamaitachi</TabsTrigger>
         </TabsList>
 
         <TabsContent className="pt-1" value="scores">
