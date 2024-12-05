@@ -77,7 +77,7 @@ export const SystemVoiceCustomization: FC<SystemVoiceSelectionProps> = ({
     };
 
     fetchSystemVoices();
-  }, []);
+  }, );
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const unchagedSystemVoiceId = systemVoiceId;

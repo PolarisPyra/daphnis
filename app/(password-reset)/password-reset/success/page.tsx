@@ -1,20 +1,20 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default async function SuccessPage() {
+export default function SuccessPage() {
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => {
-      router.push("/"); // Redirect to login page
+    const redirectTimer = setTimeout(() => {
+      router.push("/"); 
     }, 5000);
-  });
 
+    return () => clearTimeout(redirectTimer);
+  }, ); 
   return (
     <main className="max-w-xl px-4 mx-auto flex flex-col justify-center h-screen">
       <Card className="gap-4 flex flex-col p-6">

@@ -1,8 +1,5 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -19,16 +16,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "@/components/ui/use-toast";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { GameVersion } from "@/prisma/schemas/daphnis/generated/daphnis";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { toast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { GameVersion } from "@/prisma/schemas/daphnis/generated/daphnis";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { getGameList, updatePlayerGameVersionChuni } from "./action";
 
 type ChunithmGameVersionSelectionProps = {
@@ -62,7 +62,7 @@ export function PlayerChangableChunithmGameVersionSelection({}: ChunithmGameVers
       }
     }
     fetchCurrentGameVersion();
-  }, []);
+  }, );
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const newGameVersion = data.gameVersion ?? selectedGameVersion;

@@ -73,7 +73,7 @@ export const MapIconCustomization: FC<SystemVoiceSelectionProps> = ({
     };
 
     fetchMapIcons();
-  }, []);
+  }, );
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const uncangedMapIconId = mapIconId;

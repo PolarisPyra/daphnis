@@ -74,7 +74,7 @@ export const NameplateCustomization: FC<NamePlateSelectionProps> = ({
     };
 
     fetchNamePlates();
-  }, []);
+  }, );
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const defaultNamePlateId = nameplateId;

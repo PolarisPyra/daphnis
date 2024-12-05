@@ -80,7 +80,7 @@ export const TeamCustomization: FC<TeamSelectionProps> = ({
     };
 
     fetchTeams();
-  }, []);
+  },);
 
   function onSubmitTeamSelection(data: z.infer<typeof teamSelectionSchema>) {
     const defaultTeamId = teamID;
