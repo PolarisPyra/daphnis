@@ -2,8 +2,8 @@
 import { getAuth } from "@/auth/queries/getauth";
 import { getSupportedVersionNumber } from "@/lib/api";
 import { artemis } from "@/lib/prisma";
-import { fromZonedTime, toZonedTime } from "date-fns-tz";
 import { parse } from "date-fns";
+import { fromZonedTime, toZonedTime } from "date-fns-tz";
 
 const TACHI_CLASSES = [
   undefined,

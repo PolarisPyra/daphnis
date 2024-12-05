@@ -1,8 +1,7 @@
 "use server";
 
 import { getAuth } from "@/auth/queries/getauth";
-import { artemis } from "@/lib/prisma";
-import { daphnis } from "@/lib/prisma";
+import { artemis, daphnis } from "@/lib/prisma";
 
 export const LinkAimeCard = async (formData: FormData) => {
   const { user } = await getAuth();

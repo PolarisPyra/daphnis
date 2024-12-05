@@ -1,8 +1,8 @@
 "use client";
-import React, { FC } from "react";
 import { getDifficultyText } from "@/lib/helpers";
-import ImageCell from "../scoreplaylog/image";
 import { userRatingBaseList } from "@/lib/types";
+import { FC } from "react";
+import ImageCell from "../scoreplaylog/image";
 
 type ChunithmProfileHotPlays = {
   chuniProfileNextPlays: {

@@ -1,5 +1,5 @@
-import { PrismaClient as DaphnisClient } from "@/prisma/schemas/daphnis/generated/daphnis";
 import { PrismaClient as ArtemisClient } from "@/prisma/schemas/artemis/generated/artemis";
+import { PrismaClient as DaphnisClient } from "@/prisma/schemas/daphnis/generated/daphnis";
 
 // Singleton pattern for Daphnis client
 const DaphnisClientSingleton = () => {

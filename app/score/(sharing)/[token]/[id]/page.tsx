@@ -1,10 +1,9 @@
-import { getAuth } from "@/auth/queries/getauth";
-import { shareScore } from "../token";
 import { getGrade } from "@/lib/helpers";
 import {
   type chuni_score_playlog,
   chuni_static_music,
 } from "@/prisma/schemas/artemis/generated/artemis";
+import { shareScore } from "../token";
 import { getPlaylogId, getSharedSong } from "./actions";
 
 type chunithm = chuni_score_playlog &

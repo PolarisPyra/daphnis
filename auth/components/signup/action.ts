@@ -1,12 +1,12 @@
 "use server";
 
+import { lucia } from "@/lib/lucia";
+import { artemis, daphnis } from "@/lib/prisma";
+import { GameVersion } from "@/prisma/schemas/daphnis/generated/daphnis";
 import { generateId } from "lucia";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
-import { lucia } from "@/lib/lucia";
-import { daphnis, artemis } from "@/lib/prisma";
-import { GameVersion } from "@/prisma/schemas/daphnis/generated/daphnis";
 
 const signUp = async (formData: FormData) => {
   const formDataRaw = {

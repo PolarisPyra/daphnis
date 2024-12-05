@@ -1,8 +1,5 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -14,22 +11,24 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "../../ui/use-toast";
+import { cn } from "@/lib/utils";
 import { chuni_static_systemvoice } from "@/prisma/schemas/daphnis/generated/daphnis";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { toast } from "../../ui/use-toast";
 import { getCurrentSystemVoice, updatePlayerSystemVoiceId } from "./actions";
 
 const getNamePlateTextures = (id: number | undefined) => {
@@ -109,7 +108,7 @@ export const SystemVoiceCustomization: FC<SystemVoiceSelectionProps> = ({
             form.watch("PlayerSystemVoice"),
             `systemVoiceThumbnails/CHU_UI_SystemVoice_${systemVoiceId.toString().padStart(8, "0")}.png`,
           )
-        : `systemVoiceThumbnails/CHU_UI_SystemVoice_Default.png`,
+        : "systemVoiceThumbnails/CHU_UI_SystemVoice_Default.png",
     },
   };
 

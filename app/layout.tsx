@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
 import { Toaster } from "@/components/ui/toaster";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
 import "./globals.css";
 import CustomThemeProvider from "./theme-provider";
 export const metadata: Metadata = {

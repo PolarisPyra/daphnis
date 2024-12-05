@@ -1,10 +1,9 @@
 "use client";
-import React, { FC, useMemo, useState } from "react";
-import ImageCell from "../scoreplaylog/image";
-import type * as Prisma from "@prisma/client";
-import { Input } from "../ui/input";
 import { getDifficultyText } from "@/lib/helpers";
 import { allSongs } from "@/lib/types";
+import { FC, useMemo, useState } from "react";
+import ImageCell from "../scoreplaylog/image";
+import { Input } from "../ui/input";
 
 type ChunithmAllSongs = {
   chuniAllSongs: {

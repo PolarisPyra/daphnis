@@ -1,6 +1,10 @@
 {
+  "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": ["check-file"],
   "rules": {
-    "@next/next/no-img-element": "off"
-  },
-  "extends": "next/core-web-vitals"
+    "prefer-arrow-callback": ["error"],
+    "prefer-template": ["error"],
+    "semi": ["error"],
+    "quotes": ["error", "double"]
+  }
 }

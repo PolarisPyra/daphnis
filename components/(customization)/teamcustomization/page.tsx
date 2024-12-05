@@ -1,8 +1,5 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -19,18 +16,21 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "../../ui/use-toast";
-import { getCurrentTeams, updatePlayerTeam, addTeam } from "./actions";
+import { cn } from "@/lib/utils";
 import { chuni_profile_team } from "@/prisma/schemas/artemis/generated/artemis";
-import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { toast } from "../../ui/use-toast";
+import { addTeam, getCurrentTeams, updatePlayerTeam } from "./actions";
 
 type teams = chuni_profile_team;
 

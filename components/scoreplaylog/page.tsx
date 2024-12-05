@@ -1,8 +1,8 @@
-import { DataTable } from "./data-table";
 import { getAuth } from "@/auth/queries/getauth";
 import { z } from "zod";
-import { columns } from "./colums";
 import { getSongsWithTitles } from "./action";
+import { columns } from "./colums";
+import { DataTable } from "./data-table";
 
 const userSchema = z.object({
   UserId: z.number(),

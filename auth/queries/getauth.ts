@@ -1,7 +1,7 @@
 import { cache } from "react";
 
-import type { Session, User } from "lucia";
 import { lucia } from "@/lib/lucia";
+import type { Session, User } from "lucia";
 import { cookies } from "next/dist/client/components/headers";
 
 export const getAuth = cache(
@@ -35,7 +35,7 @@ export const getAuth = cache(
           sessionCookie.attributes,
         );
       }
-    } catch {}
+    } catch { }
     return result;
   },
 );

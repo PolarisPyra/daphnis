@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { ArrowLeftSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { ArrowLeftSquare } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 import { EmailPasswordResetLink } from "./emailforgotpassword";
 
 export default function ForgotPassword() {
