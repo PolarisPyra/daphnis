@@ -1,5 +1,5 @@
-import { generateShareToken } from "@/app/score/(sharing)/[token]/token";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +8,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { generateShareToken } from "@/app/score/(sharing)/[token]/token";
 
 interface ActionsCellProps {
   row: any; //unsure what to use here

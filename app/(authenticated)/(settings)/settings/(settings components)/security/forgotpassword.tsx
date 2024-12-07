@@ -1,7 +1,7 @@
 "use server";
 
 import { getAuth } from "@/auth/queries/getauth";
-import { daphnis } from "@/lib/prisma";
+import { artemis, daphnis } from "@/lib/prisma";
 import { Argon2id } from "oslo/password";
 
 export const updatePassword = async (
@@ -57,6 +57,6 @@ export const updatePassword = async (
 
     return { success: "Password updated successfully" };
   } catch (error: any) {
-    return { error: `Failed to update password: ${  error.message}` };
+    return { error: "Failed to update password: " + error.message };
   }
 };

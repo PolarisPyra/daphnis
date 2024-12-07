@@ -1,5 +1,10 @@
 "use client";
 
+import React, { FC, useEffect, useState } from "react";
+import { chuni_static_avatar } from "@/prisma/schemas/artemis/generated/artemis";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { getCurrentAvatarParts } from "./actions";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -11,25 +16,22 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { chuni_static_avatar } from "@/prisma/schemas/artemis/generated/artemis";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
-import { getCurrentAvatarParts, updateAvatarParts } from "./actions";
+import { updateAvatarParts } from "./actions";
 type chunithm_avatar = chuni_static_avatar;
 
 const getAvatarTextureSrc = (id: number | undefined) => {

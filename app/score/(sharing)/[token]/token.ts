@@ -2,7 +2,8 @@
 
 import { getAuth } from "@/auth/queries/getauth";
 import { daphnis } from "@/lib/prisma";
-import { randomBytes, randomUUID } from "crypto";
+import { randomUUID } from "crypto";
+import { randomBytes } from "crypto";
 
 export async function generateShareToken(id: number): Promise<{
   token?: string;

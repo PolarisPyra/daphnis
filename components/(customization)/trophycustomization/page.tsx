@@ -1,5 +1,9 @@
 "use client";
 
+import React, { FC, useEffect, useState } from "react";
+import { chuni_static_avatar } from "@/prisma/schemas/artemis/generated/artemis";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -21,15 +25,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { chuni_static_trophies } from "@/prisma/schemas/daphnis/generated/daphnis";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "../../ui/use-toast";
 import { getCurrentTrophies, updatePlayerTrophy } from "./actions";
+import { chuni_static_trophies } from "@/prisma/schemas/daphnis/generated/daphnis";
 
 type static_trophies = chuni_static_trophies;
 
@@ -68,7 +69,7 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
     };
 
     fetchTrophies();
-  }, );
+  }, []);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const defaultNamePlateId = trophyID;

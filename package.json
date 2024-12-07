@@ -16,8 +16,7 @@
     "dev-daphnis:pull": "npx prisma db pull --schema prisma/schemas/daphnis/schema.prisma",
     "dev-daphnis:push": "npx prisma db push --schema prisma/schemas/daphnis/schema.prisma",
     "dev-daphnis:migrate": "prisma migrate dev  --schema=./prisma/schemas/daphnis/schema.prisma",
-    "lint": "next lint",
-    "format": "prettier app/ --write"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "3.6.0",
@@ -55,7 +54,6 @@
     "@react-email/components": "0.0.19",
     "@tanstack/react-query": "5.48.0",
     "@tanstack/react-table": "8.17.3",
-    "@trivago/prettier-plugin-sort-imports": "^5.0.1",
     "@types/bcryptjs": "2.4.6",
     "@types/encoding-japanese": "2.2.1",
     "@types/imagemagick": "0.0.35",
@@ -105,11 +103,9 @@
     "@types/react-dom": "18",
     "eslint": "8",
     "eslint-config-next": "14.2.4",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-check-file": "^2.8.0",
     "postcss": "8",
     "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.9",
+    "prettier-plugin-tailwindcss": "0.6.5",
     "tailwindcss": "3.4.1",
     "typescript": "5.5.2"
   },

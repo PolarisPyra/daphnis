@@ -2,8 +2,8 @@
 
 import { daphnis } from "@/lib/prisma";
 import { randomUUID } from "crypto";
-import { redirect } from "next/navigation";
 import { Resend } from "resend";
+import { redirect } from "next/navigation";
 
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 const DOMAIN = process.env.DOMAIN || "localhost:3000";

@@ -1,19 +1,19 @@
 "use client";
 // https://github.com/dracor-org/einakter/blob/466ca1663098a16cc1141129a6ba22628135b04c/src/components/Table.tsx#L26
 // used the above for reference on how to fuzzy search
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ColumnDef,
-  ColumnFiltersState,
   SortingState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
+  flexRender,
+  getFilteredRowModel,
+  getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
+  ColumnFiltersState,
 } from "@tanstack/react-table";
-import { useState } from "react";
 
 import {
   Table,

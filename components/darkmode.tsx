@@ -1,8 +1,8 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
 function DarkToggle() {
   const [mounted, setMounted] = useState(false);
