@@ -32,7 +32,7 @@ export const ChunithmTopPlays: FC<chunithmTopPlays> = ({
           return (
             <div key={index} className="flex flex-col items-center p-2">
               <div className="font-bold"></div>
-              <ImageCell jacketPath={chuniProfileTopPlays.jacketPath!} />
+              <ImageCell jacketPath={chuniProfileTopPlays.jacketPath} />
               <ul className="mt-2 text-center">
                 <li>
                   <strong>Title: </strong> {chuniProfileTopPlays.title}
