@@ -18,7 +18,7 @@ export const ChunithmNextPlays: FC<ChunithmProfileHotPlays> = ({
         return (
           <div key={index} className="flex flex-col items-center p-2">
             <div className="font-bold"></div>
-            <ImageCell jacketPath={playerNextRatingList.jacketPath!} />
+            <ImageCell jacketPath={playerNextRatingList.jacketPath} />
             <div>
               <ul className="mt-2 text-center">
                 <li>
