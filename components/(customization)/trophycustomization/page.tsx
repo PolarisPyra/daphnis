@@ -40,6 +40,21 @@ type AvatarSelectionProps = {
   };
 };
 
+const honorBackgrounds = {
+  0: "honorBackgrounds/honor_bg_normal.png",
+  1: "honorBackgrounds/honor_bg_bronze.png",
+  2: "honorBackgrounds/honor_bg_silver.png",
+  3: "honorBackgrounds/honor_bg_gold.png",
+  4: "honorBackgrounds/honor_bg_gold.png",
+  5: "honorBackgrounds/honor_bg_platina.png",
+  6: "honorBackgrounds/honor_bg_platina.png",
+  7: "honorBackgrounds/honor_bg_rainbow.png",
+  9: "honorBackgrounds/honor_bg_staff.png",
+  10: "honorBackgrounds/honor_bg_ongeki.png",
+  11: "honorBackgrounds/honor_bg_maimai.png",
+  null: "",
+};
+
 export const TrophyCustomization: FC<AvatarSelectionProps> = ({
   playerTrophySelectionData,
 }) => {
@@ -54,6 +69,9 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
   });
 
   const [trophyID, setTrophyId] = useState<number | undefined>(undefined);
+  const [selectedTrophyData, setSelectedTrophyData] = useState<
+    static_trophies | undefined
+  >(undefined);
 
   useEffect(() => {
     const fetchTrophies = async () => {
@@ -62,6 +80,10 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
         if (data.length > 0) {
           setTrophyId(data[0].trophyId!);
           form.setValue("trophies", data[0].trophyId as number);
+          const initialTrophy = playerTrophySelectionData.statictrophies.find(
+            (part) => part.id === data[0].trophyId,
+          );
+          setSelectedTrophyData(initialTrophy);
         }
       } catch (error) {
         console.error("Error fetching trophies:", error);
@@ -69,7 +91,7 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
     };
 
     fetchTrophies();
-  }, []);
+  }, [form, playerTrophySelectionData.statictrophies]);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const defaultNamePlateId = trophyID;
@@ -89,6 +111,13 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
     });
   }
 
+  const backgroundImage =
+    selectedTrophyData?.rareType != null
+      ? honorBackgrounds[
+          selectedTrophyData.rareType as keyof typeof honorBackgrounds
+        ] || honorBackgrounds[0]
+      : honorBackgrounds[0];
+
   return (
     <main className="flex flex-col items-center space-y-6">
       <div>
@@ -98,7 +127,21 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
               control={form.control}
               name="trophies"
               render={({ field }) => (
-                <FormItem className="flex flex-col">
+                <FormItem className="relative flex flex-col">
+                  <div className="relative">
+                    <img
+                      className="h-[40px] w-[400px]"
+                      src={backgroundImage}
+                      alt="Honor BG"
+                    />
+                    {selectedTrophyData && (
+                      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center">
+                        <span className="text-center text-sm font-bold text-black">
+                          {selectedTrophyData.str}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                   <FormLabel className="pb-2">Select Trophy</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -132,6 +175,7 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
                                   key={part.id}
                                   onSelect={() => {
                                     form.setValue("trophies", part.id);
+                                    setSelectedTrophyData(part);
                                   }}
                                 >
                                   <Check
