@@ -239,7 +239,7 @@ def main():
 
     ensure_tables(engine)
 
-    rootDir = "/home/polaris/media/windows/Users/polaris/Documents/Arcade/Chunithm Luminous Plus English"
+    rootDir = "/home/polaris/Documents/Chunithm Luminous Plus English"
     filesToSearch = {"Chara.xml", "NamePlate.xml", "SystemVoice.xml", "Trophy.xml", "MapIcon.xml"}
 
     GREEN = '\033[92m'
