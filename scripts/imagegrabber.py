@@ -113,8 +113,8 @@ def find_subdirectories(base_directories, subdirectory_names):
 
 # Base directories
 base_directories = [
-    r"/home/polaris/media/windows/Users/polaris/Documents/Arcade/Chunithm Luminous Plus English/App/data",
-    r"/home/polaris/media/windows/Users/polaris/Documents/Arcade/Chunithm Luminous Plus English/option",
+    r"/home/polaris/Downloads/Chunithm Luminous Plus English/App/data",
+    r"/home/polaris/Downloads/Chunithm Luminous Plus English/option",
 ]
 
 # Subdirectories to look for
