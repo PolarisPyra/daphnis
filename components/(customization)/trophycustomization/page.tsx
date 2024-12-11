@@ -91,7 +91,7 @@ export const TrophyCustomization: FC<AvatarSelectionProps> = ({
     };
 
     fetchTrophies();
-  }, [form, playerTrophySelectionData.statictrophies]);
+  }, []);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const defaultNamePlateId = trophyID;
